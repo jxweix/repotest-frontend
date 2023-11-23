@@ -8,6 +8,7 @@ function p1() {
       <Link href={"/test/2"}> 2</Link>
       <Link href={"/test/3"}> 3</Link>
       <Link href={"/test/4"}> 4</Link>
+      <Link href={"/test/5"}> 5</Link>
     </div>
   );
 }
