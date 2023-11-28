@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { Montserrat } from "next/font/google";
+import Pagetest from './test/index.jsx'
 
-const montserrat = Montserrat({ subsets: ["latin"] });
-
-export default function Home() {
-  return <>GG Homepage</>;
+export default function Page() {
+  return (
+    <Pagetest/>
+  )
 }
