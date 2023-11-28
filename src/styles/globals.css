@@ -1,20 +1,44 @@
 @import './tailwind.css';
 
+*{
+    padding: 0;
+    margin: 0;
+}
 
+header{
+    background-color: transparent;
+    background-image: url('/images/bkPage-1.jpg');
+}
+
+/* NavBar */
+.active-item {
+    color: purple;
+    font-weight: 600;
+}
+
+.item{
+    font-weight: 400;
+}
 .Navbar {
-    background-color: #fff;
-    -webkit-backdrop-filter: blur(20px);
+    background-image: none;
+    background-position: top;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    
 }
 
 .BG-page123 {
-    background-image: url(../../public/images/bkPage.jpg);
-    width: auto;
-    height: auto;
+    background-image: url('/images/bkPage-1.jpg');
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 1080px;
 }
 
 body {
     height: 100%;
     width: 100%;
+    background-image: url('/images/bkPage-1.jpg');
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(to bottom,
             transparent,
