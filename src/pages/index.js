@@ -1,4 +1,4 @@
-import Pagetest from './test/index.jsx'
+import Pagetest from './home/index.js'
 
 export default function Page() {
   return (
