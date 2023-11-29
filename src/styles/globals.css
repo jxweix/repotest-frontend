@@ -1,11 +1,11 @@
 @import './tailwind.css';
 
-*{
+* {
     padding: 0;
     margin: 0;
 }
 
-header{
+header {
     background-color: transparent;
     background-image: url('/images/bkPage-1.jpg');
 }
@@ -16,15 +16,30 @@ header{
     font-weight: 600;
 }
 
-.item{
+.item {
     font-weight: 400;
 }
+
 .Navbar {
     background-image: none;
     background-position: top;
     background-color: transparent;
     background-repeat: no-repeat;
-    
+
+}
+
+/* page Home */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh; /* ความสูงจะเท่ากับ 100% ของ viewport height */
+}
+
+.content {
+    display: grid;
+    justify-items: center;
+    grid-row: 2;
 }
 
 .BG-page123 {

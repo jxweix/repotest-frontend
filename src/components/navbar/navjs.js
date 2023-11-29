@@ -19,11 +19,11 @@ export default function App() {
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-3">
           <NavbarItem
-            isActive={current == '/test'}
+            isActive={current == '/home'}
           >
             <Link
-              color="foreground" href="./test"
-              className={current == '/test' ? 'active-item' : ''}>
+              color="foreground" href="./home"
+              className={current == '/home' ? 'active-item' : ''}>
               หน้าแรก
             </Link>
           </NavbarItem>
