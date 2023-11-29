@@ -66,10 +66,10 @@ export default function App() {
           type="search"
         />
         <Button variant="light" isIconOnly >
-          <Image src={Iconnoti} width={28} />
+          <Image src={Iconnoti} width={28} alt="icon-noti" />
         </Button>
         <Button variant="light" isIconOnly >
-          <Image src={Iconmsg} width={28} />
+          <Image src={Iconmsg} width={28} alt="icon-noti2" />
         </Button>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
