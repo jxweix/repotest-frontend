@@ -33,7 +33,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 85vh; /* ความสูงจะเท่ากับ 100% ของ viewport height */
+    height: 94vh; /* ความสูงจะเท่ากับ 100% ของ viewport height */
 }
 
 .content {
@@ -44,10 +44,9 @@ header {
 
 .BG-page123 {
     background-image: url('/images/bkPage-1.jpg');
-    position: relative;
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 1080px;
+    background-size:auto;
+    height: inherit;
+    background-attachment: fixed;
 }
 
 body {
