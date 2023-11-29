@@ -59,3 +59,15 @@ body {
             transparent,
             rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
+
+.bgsearch {
+    background-image: url('/images/bgPageSearch.jpg');
+    background-size:auto;
+    height: inherit;
+    background-attachment: fixed;
+}
+
+.cdphoto {
+    height: inherit;
+    border-radius: 2%;
+}
