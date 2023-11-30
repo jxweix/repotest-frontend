@@ -70,3 +70,51 @@ body {
     height: inherit;
     border-radius: 2%;
 }
+
+/* main */
+
+/* src/recommend/Recommend.css */
+/* src/recommend/Recommend.css */
+/* src/recommend/Recommend.css */
+.Recommend {
+    text-align: center;
+    max-width: 1000px; /* Adjust the max-width to your desired value */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .activity-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .activity-card {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    overflow: hidden;
+  }
+  
+  .activity-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This property ensures that the image maintains its aspect ratio */
+  }
+  
+  .activity-card:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .bg{
+    background-image: url('/images/bkPage-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
