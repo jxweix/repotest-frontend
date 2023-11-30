@@ -64,8 +64,14 @@ function search({ cardphoto }) {
 }
 
 export const getServerSideProps = async (context) => {
-  const res = await fetch("http://localhost:3000/api/cardphoto");
-  const cardphoto = await res.json();
-  return { props: { cardphoto } };
+  try {
+    const res = await fetch("http://localhost:3000/api/cardphoto");
+    const cardphoto = await res.json();
+    return { props: { cardphoto } };
+  }
+  catch (error) {
+    console.error("this error bro: ", error);
+    return { props: { cardphoto : null}};
+  }
 };
 export default search;
