@@ -1,6 +1,8 @@
 @import './tailwind.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&display=swap');
 
 * {
+    font-family: 'Noto Sans Thai', sans-serif;
     padding: 0;
     margin: 0;
 }
@@ -60,7 +62,7 @@ body {
 }
 
 .bgsearch {
-    background-image: url('/images/bgPageSearch.jpg');
+    background-image: url('/images/bkPage-1.jpg');
     background-size:auto;
     height: inherit;
     background-attachment: fixed;
