@@ -69,12 +69,11 @@ export default function App() {
           startContent={<SearchIcon size={18} />}
           type="search"
         />
+        <Link href="/notificate">
         <Button variant="light" isIconOnly >
           <Image src={Iconnoti} width={28} alt="icon-noti" />
         </Button>
-        <Button variant="light" isIconOnly >
-          <Image src={Iconmsg} width={28} alt="icon-noti2" />
-        </Button>
+        </Link>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
