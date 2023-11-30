@@ -1,10 +1,9 @@
 import React from "react";
 import cardphoto from "../api/cardphoto";
-import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import Link from "next/link";
 
 function search({ cardphoto }) {
-
   const mockData = [
     {
       img: "/photo/pic-1.jpg",
@@ -33,6 +32,7 @@ function search({ cardphoto }) {
     }
   ];
 
+  // const cardMaps = cardphoto.mock.map((card, i) => {
   const cardMaps = mockData.map((card, i) => {
     const key = `card-${i}`;
     return (
@@ -56,20 +56,20 @@ function search({ cardphoto }) {
       //   </CardFooter>
       // </Card>
 
-          <Card key={key} className="py-4 shadow-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.0)' }}>
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-center justify-center">
-            <p className="text-tiny uppercase font-bold">Daily Mix</p>
-            <small className="text-default-500">12 Tracks</small>
-            <h4 className="font-bold text-large">Frontend Radio</h4>
-          </CardHeader>
-          <CardBody className="items-center">
-            <Image
-              alt="Card background"
-              src={card.img}
-              width={270}
-            />
-          </CardBody>
-        </Card>
+      <Card key={key} className="py-4 shadow-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.0)' }}>
+        <CardHeader className="pb-0 pt-2 px-4 flex-col items-center justify-center">
+          <p className="text-tiny uppercase font-bold">Daily Mix</p>
+          <small className="text-default-500">12 Tracks</small>
+          <h4 className="font-bold text-large">Frontend Radio</h4>
+        </CardHeader>
+        <CardBody className="items-center">
+          <Image
+            alt="Card background"
+            src={card.img}
+            width={270}
+          />
+        </CardBody>
+      </Card>
     );
   });
 
@@ -77,13 +77,13 @@ function search({ cardphoto }) {
     <div className="bgsearch">
       <div className="md:container md:mx-auto">
         <div className="pt-6">
-        <p className="text-[60px] text-white font-semibold ">เลือกสิ่งที่คุณสนใจ </p>
-        <p className="text-white font-semibold -mt-6">คนหากิจกรรมที่คุณสนใจ</p>
+          <p className="text-[60px] text-white font-semibold ">เลือกสิ่งที่คุณสนใจ </p>
+          <p className="text-white font-semibold -mt-6">คนหากิจกรรมที่คุณสนใจ</p>
         </div>
-          <div>
-            <h6>กีฬา</h6>
-            <div className="grid lg: grid-cols-3 grid-rows-3">{cardMaps}</div>
-          </div>
+        <div>
+          <h6>กีฬา</h6>
+          <div className="grid lg: grid-cols-3 grid-rows-3">{cardMaps}</div>
+        </div>
       </div>
     </div>
   );
