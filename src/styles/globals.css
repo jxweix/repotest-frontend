@@ -1,8 +1,10 @@
 @import './tailwind.css';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&display=swap');
 
 * {
-    padding: 0;
-    margin: 0;
+  font-family: 'Noto Sans Thai', sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 header {
