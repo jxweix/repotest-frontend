@@ -46,7 +46,7 @@ function search({ cardphoto }) {
   const cardMaps = mockData.map((card, i) => {
     const key = `card-${i}`;
     return (
-      <div className="bgsearch flex items-center justify-center h-screen">
+      <div className="bgsearch flex items-center justify-center">
       <Card key={key} className="py-4 shadow-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.0)' }}>
       <CardHeader className="absolute z-10 top-1 flex-col !items-start">
         <p className="text-[60px] text-white uppercase font-normal pt-4">{card.title}</p>
