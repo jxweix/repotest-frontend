@@ -65,7 +65,8 @@ function search({ cardphoto }) {
 
 export const getServerSideProps = async (context) => {
   try {
-    const res = await fetch("http://localhost:3000/api/cardphoto");
+    // const res = await fetch("http://localhost:3000/api/cardphoto");
+    const res = await fetch("https://repotest-dev.vercel.app/api/cardphoto")
     const cardphoto = await res.json();
     return { props: { cardphoto } };
   }
