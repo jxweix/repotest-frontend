@@ -14,6 +14,8 @@ export default function Recommend() {
     { name: 'Gardening', image: 'https://i.pinimg.com/564x/41/17/05/4117052086888f8f4f34f54ce4bedc36.jpg' },
     { name: 'Running', image: 'https://i.pinimg.com/564x/55/15/47/551547d869166af7685c309bcb11a8b6.jpg' },
     { name: 'Swimming', image: 'https://i.pinimg.com/564x/54/d9/aa/54d9aac6a01f3ea05ae4b09268141dd3.jpg' },
+    { name: 'Photography', image: 'https://i.pinimg.com/564x/1f/af/fa/1faffa6eeff539a9ca13b4d9af4c4018.jpg' },
+    { name: 'Gaming', image: 'https://i.pinimg.com/564x/bd/11/0c/bd110c6612e1b0b7a99da4d836d0e5e5.jpg' },
   ];
 
   const handleActivityClick = (activity) => {
@@ -21,7 +23,7 @@ export default function Recommend() {
   };
 
   return (
-    <div className="max-w-[900px] mx-auto gap-2 grid grid-cols-4 px-8 text-center">
+    <div className="max-w-[900px] mx-auto px-8 text-center relative">
       {/* Set background image for the entire page */}
       <style jsx global>{`
         body {
@@ -31,28 +33,34 @@ export default function Recommend() {
         }
       `}</style>
 
-      {activities.map((activity, index) => (
-        <Card
-          key={index}
-          className="h-[300px] relative"
-          onClick={() => handleActivityClick(activity)}
-          style={{ cursor: 'pointer' }}
-        >
-          <Image
-            removeWrapper
-            alt={`${activity.name} background`}
-            className="z-0 w-full h-full object-cover"
-            src={activity.image}
-          />
-          {/* Details on hover */}
-          <CardBody className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="text-white text-center">
-              <p className="text-base font-bold">{activity.name}</p>
-              {/* Add more details or customize the information displayed */}
-            </div>
-          </CardBody>
-        </Card>
-      ))}
+      {/* Blur background with light gray color and transparency */}
+      <div className="absolute inset-0 bg-gray-200 bg-opacity-70 backdrop-filter backdrop-blur-md"></div>
+
+      {/* Card grid with wider gap */}
+      <div className="max-w-[900px] mx-auto gap-4 grid grid-cols-4 relative z-10">
+        {activities.map((activity, index) => (
+          <Card
+            key={index}
+            className="h-[300px] relative"
+            onClick={() => handleActivityClick(activity)}
+            style={{ cursor: 'pointer' }}
+          >
+            <Image
+              removeWrapper
+              alt={`${activity.name} background`}
+              className="z-0 w-full h-full object-cover"
+              src={activity.image}
+            />
+            {/* Details on hover */}
+            <CardBody className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="text-white text-center">
+                <p className="text-base font-bold">{activity.name}</p>
+                {/* Add more details or customize the information displayed */}
+              </div>
+            </CardBody>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
