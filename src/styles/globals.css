@@ -13,11 +13,6 @@ header {
 }
 
 /* NavBar */
-.active-item {
-    color: purple;
-    font-weight: 600;
-}
-
 .item {
     font-weight: 400;
 }
@@ -116,4 +111,11 @@ body {
   transform: rotateY(180deg);
 }
 
-  
+/* notificate page */
+
+.notification-page {
+  background-image: url('/images/bkPage-1.jpg');
+  background-size:cover;
+  height:100%;
+  background-attachment: fixed;
+}
