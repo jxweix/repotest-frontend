@@ -1,36 +1,31 @@
 const mockData = [
   {
     img: "/photo/pic-1.jpg",
-    title: "hello",
-    text: "1",
+    title: "กีฬาทางน้ำ",
+    text: "ว่ายน้ำ ปาร์ตี้ริมสระ",
   },
   {
     img: "/photo/pic-1.jpg",
-    title: "what",
-    text: "2",
+    title: "เอ็กตรีม",
+    text: "กระโดดร่ม ปืนหน้าผา",
   },
   {
     img: "/photo/pic-1.jpg",
-    title: "ta",
-    text: "3",
+    title: "กีฬากลางแจ้ง",
+    text: "เล่นบอล ตีเทนนิส",
   },
   {
     img: "/photo/pic-1.jpg",
-    title: "fak",
-    text: "4",
+    title: "บอร์ดเกม",
+    text: "เล่นไผ่ หมาป่า เกมเศรษฐี",
   },
   {
     img: "/photo/pic-1.jpg",
-    title: "ka",
-    text: "5",
-  },
-  {
-    img: "/photo/pic-1.jpg",
-    title: "bro",
-    text: "6",
-  },
+    title: "เกมออนไลน์",
+    text: "เกมยิงปืน เกมต่อสู้",
+  }
 ];
 
-export default function handler(req, res) {
-  res.status(200).json({ mock: mockData });
-}
+// export default function handler(req, res) {
+//   res.status(200).json({ mock: mockData });
+// }
