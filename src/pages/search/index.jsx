@@ -1,7 +1,8 @@
 import React from "react";
-import cardphoto from "../api/cardphoto";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
-import Link from "next/link";
+import {Chip} from "@nextui-org/react";
+
+const initialFruits = ["เข้าวัดหวังเอาบุญ เข้าหาคุณหวังเอาหี", "อายุ 15 ตามหารักแท้", "วันไนท์สแตนด์", "นัดเย็ด", "1,500พี่ว่าไง"]
 
 function search({ cardphoto }) {
   const mockData = [
@@ -32,6 +33,15 @@ function search({ cardphoto }) {
     }
   ];
 
+  const [fruits, setFruits] = React.useState(initialFruits);
+
+  const handleClose = (fruitToRemove) => {
+    setFruits(fruits.filter(fruit => fruit !== fruitToRemove));
+    if (fruits.length === 1) {
+      setFruits(initialFruits);
+    }
+  };
+
   // const cardMaps = cardphoto.mock.map((card, i) => {
   const cardMaps = mockData.map((card, i) => {
     const key = `card-${i}`;
@@ -55,8 +65,15 @@ function search({ cardphoto }) {
   });
 
   return (
-    <div className="bgsearch">
+    <div className="BG-page123">
       <div className="md:container md:mx-auto">
+        <div className="flex gap-2 pt-6 pl-20 ">
+        {fruits.map((fruit, index) => (
+          <Chip key={index} onClose={() => handleClose(fruit)} variant="flat" className="bg-white">
+            {fruit}
+          </Chip>
+        ))}
+      </div>
         <div className="pt-6">
           <p className="text-[60px] text-white font-semibold pl-20">เลือกสิ่งที่คุณสนใจ </p>
           <p className="text-white font-semibold -mt-6 pl-20 h-20">คนหากิจกรรมที่คุณสนใจ</p>
