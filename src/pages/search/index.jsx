@@ -90,15 +90,8 @@ function search({ cardphoto }) {
 }
 
 // export const getServerSideProps = async (context) => {
-//   try {
-//     // const res = await fetch("http://localhost:3000/api/cardphoto"); / ใช้ตอน local
-//     const res = await fetch("https://repotest-dev.vercel.app/api/cardphoto") /ตอนอัพ path เปลี่ยน
-//     const cardphoto = await res.json();
-//     return { props: { cardphoto } };
-//   }
-//   catch (error) {
-//     console.error("this error bro: ", error);
-//     return { props: { cardphoto : null}};
-//   }
+//   const res = await fetch("http://localhost:3000/api/cardphoto");
+//   const cardphoto = await res.json();
+//   return { props: { cardphoto } };
 // };
 export default search;
