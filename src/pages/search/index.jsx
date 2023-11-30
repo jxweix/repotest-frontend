@@ -1,87 +1,85 @@
 import React from "react";
-import cardphoto from "../api/cardphoto";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
-import Link from "next/link";
+import {Chip} from "@nextui-org/react";
+
+const initialFruits = ["เข้าวัดหวังเอาบุญ เข้าหาคุณหวังเอาหี", "อายุ 15 ตามหารักแท้", "วันไนท์สแตนด์", "นัดเย็ด", "1,500พี่ว่าไง"]
 
 function search({ cardphoto }) {
   const mockData = [
     {
-      img: "/photo/pic-1.jpg",
+      img: "/photo/Group 11.png",
       title: "กีฬาทางน้ำ",
       text: "ว่ายน้ำ ปาร์ตี้ริมสระ",
     },
     {
-      img: "/photo/pic-1.jpg",
+      img: "/photo/Group 12.png",
       title: "เอ็กตรีม",
       text: "กระโดดร่ม ปืนหน้าผา",
     },
     {
-      img: "/photo/pic-1.jpg",
+      img: "/photo/Group 14.png",
       title: "กีฬากลางแจ้ง",
       text: "เล่นบอล ตีเทนนิส",
     },
     {
-      img: "/photo/pic-1.jpg",
+      img: "/photo/Group 15.png",
       title: "บอร์ดเกม",
       text: "เล่นไผ่ หมาป่า เกมเศรษฐี",
     },
     {
-      img: "/photo/pic-1.jpg",
+      img: "/photo/Group 16.png",
       title: "เกมออนไลน์",
       text: "เกมยิงปืน เกมต่อสู้",
     }
   ];
 
+  const [fruits, setFruits] = React.useState(initialFruits);
+
+  const handleClose = (fruitToRemove) => {
+    setFruits(fruits.filter(fruit => fruit !== fruitToRemove));
+    if (fruits.length === 1) {
+      setFruits(initialFruits);
+    }
+  };
+
   // const cardMaps = cardphoto.mock.map((card, i) => {
   const cardMaps = mockData.map((card, i) => {
     const key = `card-${i}`;
     return (
-      // <Card key={key} isFooterBlurred radius="lg" className="border-none">
-      //   <Image
-      //     alt="Woman listing to music"
-      //     className="cdphoto"
-      //     src={card.img}
-      //   />
-      //   <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-      //     <p className="text-tiny text-black/80">{card.title}</p>
-      //     <Button
-      //       className="text-tiny text-black bg-black/20"
-      //       variant="flat"
-      //       color="default"
-      //       radius="lg"
-      //       size="sm"
-      //     >
-      //       {card.text}
-      //     </Button>
-      //   </CardFooter>
-      // </Card>
-
+      <div className="bgsearch flex items-center justify-center h-screen">
       <Card key={key} className="py-4 shadow-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.0)' }}>
-        <CardHeader className="pb-0 pt-2 px-4 flex-col items-center justify-center">
-          <p className="text-tiny uppercase font-bold">Daily Mix</p>
-          <small className="text-default-500">12 Tracks</small>
-          <h4 className="font-bold text-large">Frontend Radio</h4>
-        </CardHeader>
-        <CardBody className="items-center">
-          <Image
-            alt="Card background"
-            src={card.img}
-            width={270}
-          />
-        </CardBody>
+      <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+        <p className="text-[60px] text-white uppercase font-normal pt-4">{card.title}</p>
+        <p className="text-[30px] text-white font-normal -mt-6">{card.text}</p>
+      </CardHeader>
+      <Image
+        alt="Card background"
+        className="z-0 w-full h-full object-cover "
+        src={card.img}
+        width={370}
+      />
       </Card>
+      </div>
+      
     );
   });
 
   return (
-    <div className="bgsearch">
+    <div className="BG-page123">
       <div className="md:container md:mx-auto">
+        <div className="flex gap-2 pt-6 pl-20 ">
+        {fruits.map((fruit, index) => (
+          <Chip key={index} onClose={() => handleClose(fruit)} variant="flat" className="bg-white">
+            {fruit}
+          </Chip>
+        ))}
+      </div>
         <div className="pt-6">
-          <p className="text-[60px] text-white font-semibold ">เลือกสิ่งที่คุณสนใจ </p>
-          <p className="text-white font-semibold -mt-6">คนหากิจกรรมที่คุณสนใจ</p>
+          <p className="text-[60px] text-white font-semibold pl-20">เลือกสิ่งที่คุณสนใจ </p>
+          <p className="text-white font-semibold -mt-6 pl-20 h-20">คนหากิจกรรมที่คุณสนใจ</p>
         </div>
-        <div>
-          <h6>กีฬา</h6>
+        <div >
+          <h6 className="text-[60px] text-white font-semibold pl-20">กิจกรรม</h6>
           <div className="grid lg: grid-cols-3 grid-rows-3">{cardMaps}</div>
         </div>
       </div>
