@@ -7,12 +7,18 @@ import Link from 'next/link';
 
 export default function Notification() {
   const [joinedActivities, setJoinedActivities] = useState([
-    { id: 1, name: 'วันที่ 11/27/2023 08:30 น.', image: '/photo/noti1.jpg', description: 'ไปเรียน' },
-    { id: 2, name: 'วันที่ 11/27/2023 11:50 น.', image: '/photo/noti2.jpg', description: 'ไปตีแบด' },
-    { id: 3, name: 'วันที่ 11/27/2023 17:00 น.', image: '/photo/noti5.jpg', description: 'กลับบ้าน' },
+    { id: 1, name: 'วันที่ 11/27/2023 08:30 น.', image: getRandomPhoto(), description: 'ไปเรียน' },
+    { id: 2, name: 'วันที่ 11/27/2023 11:50 น.', image: getRandomPhoto(), description: 'ไปตีแบด' },
+    { id: 3, name: 'วันที่ 11/27/2023 17:00 น.', image: getRandomPhoto(), description: 'กลับบ้าน' },
 
   ]);
 
+  function getRandomPhoto() {
+    const photoNames = ['noti1.jpg', 'noti2.jpg', 'noti3.jpg', 'noti4.jpg', 'noti5.jpg', 'noti6.jpg'];
+    const randomIndex = Math.floor(Math.random() * photoNames.length);
+    return `/photo/${photoNames[randomIndex]}`;
+  }
+  
   const handleActivityClick = (activity) => {
     alert(`You selected: ${activity.name}`);
   };
@@ -47,7 +53,7 @@ export default function Notification() {
                   />
                 </div>
                 <div>
-                  <CardFooter className="justify-between before:bg-white/20 border-white/30 bg-black/40 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 shadow-small w-auto mx-5 z-10">
+                  <CardFooter className="justify-between before:bg-white/30 border-white/40 bg-black/50 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 shadow-2xl w-auto mx-5 z-10">
                     <p className="text-center font-normal text-[24px] text-white">{activity.name}<b className='pl-2'>{activity.description}</b></p>
                     <Link href="/search">
                       <Button className="w-[100px] h-[80px] font-semibold text-white bg-black/60">
