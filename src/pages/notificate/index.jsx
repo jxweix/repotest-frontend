@@ -7,9 +7,9 @@ import Link from 'next/link';
 
 export default function Notification() {
   const [joinedActivities, setJoinedActivities] = useState([
-    { id: 1, name: 'วันที่ 11/27/2023 10:30 น.', image: '/photo/gojosocute.jpg', description: 'ไปเล่นเกม' },
-    { id: 2, name: 'วันที่ 11/27/2023 10:30 น.', image: '/photo/gojosocute.jpg', description: 'ไปวิ่งว่าว' },
-    { id: 3, name: 'วันที่ 11/27/2023 10:30 น.', image: '/photo/gojosocute.jpg', description: 'ไปชักว่าว' },
+    { id: 1, name: 'วันที่ 11/27/2023 08:30 น.', image: '/photo/noti1.jpg', description: 'ไปเรียน' },
+    { id: 2, name: 'วันที่ 11/27/2023 11:50 น.', image: '/photo/noti2.jpg', description: 'ไปตีแบด' },
+    { id: 3, name: 'วันที่ 11/27/2023 17:00 น.', image: '/photo/noti5.jpg', description: 'กลับบ้าน' },
 
   ]);
 
