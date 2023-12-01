@@ -1,6 +1,8 @@
 import '@App/styles/globals.css'
+import '@mantine/core/styles.css';
 import Navbar from '@components/navbar/layout'
 import { useRouter } from 'next/router';
+import { MantineProvider } from '@mantine/core';
 
 export default function App({ Component, pageProps }) {
 
@@ -10,9 +12,11 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       {bkNavbar && (
-        <Navbar className="dark text-foreground bg-background">
-          <Component {...pageProps} />
-        </Navbar>
+        <MantineProvider>
+          <Navbar className="dark text-foreground bg-background">
+            <Component {...pageProps} />
+          </Navbar>
+        </MantineProvider>
       )}
       {!bkNavbar && <Component {...pageProps} />}
     </>
