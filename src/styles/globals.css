@@ -1,5 +1,6 @@
 @import './tailwind.css';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&display=swap');
+@import '@mantine/carousel/styles.css';
 
 * {
   font-family: 'Noto Sans Thai', sans-serif;
@@ -7,80 +8,82 @@
   margin: 0;
 }
 
+/* mantine */
+
 header {
-    background-color: transparent;
-    background-image: url('/images/bkPage-1.jpg');
+  background-color: transparent;
+  background-image: url('/images/bkPage-1.jpg');
 }
+
 
 /* NavBar */
 .item {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .Navbar {
-    background-image: none;
-    background-position: top;
-    background-color: transparent;
-    background-repeat: no-repeat;
+  background-image: none;
+  background-position: top;
+  background-color: transparent;
+  background-repeat: no-repeat;
 
 }
 
 /* page Home */
 .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 94vh; /* ความสูงจะเท่ากับ 100% ของ viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 94vh;
+  /* ความสูงจะเท่ากับ 100% ของ viewport height */
 }
 
 .content {
-    display: grid;
-    justify-items: center;
-    grid-row: 2;
+  display: grid;
+  justify-items: center;
+  grid-row: 2;
 }
 
+/* bg */
 .BG-page123 {
-    background-image: url('/images/bkPage-1.jpg');
-    background-size:auto;
-    height: inherit;
-    background-attachment: fixed;
-}
-
-body {
-    height: 100%;
-    width: 100%;
-    background-image: url('/images/bkPage-1.jpg');
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom,
-            transparent,
-            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-}
-
-.bgsearch {
-    background-image: url('/images/bkPage-1.jpg');
-    background-size:auto;
-    height: inherit;
-    background-attachment: fixed;
-}
-
-.cdphoto {
-    height: inherit;
-    border-radius: 2%;
-}
-
-/* main */
-
-
-/* src/recommend/Recommend.css */  
-.bg{
   background-image: url('/images/bkPage-1.jpg');
-  background-size:cover;
+  background-size: auto;
   height: inherit;
   background-attachment: fixed;
 }
 
-.recommend{
-  margin-top:30px;
+.bgsearch {
+  background-image: url('/images/bgPageSearch.jpg');
+  background-size: auto;
+  height: inherit;
+  background-attachment: fixed;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-image: url('/images/bkPage-1.jpg');
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.cdphoto {
+  height: inherit;
+  border-radius: 2%;
+}
+
+/* src/recommend/Recommend.css */
+.bg {
+  background-image: url('/images/bkPage-1.jpg');
+  background-size: cover;
+  height: inherit;
+  background-attachment: fixed;
+}
+
+.recommend {
+  margin-top: 30px;
   margin-bottom: 0px;
 }
 
@@ -109,13 +112,4 @@ body {
 
 .flip-card-back {
   transform: rotateY(180deg);
-}
-
-/* notificate page */
-
-.notification-page {
-  background-image: url('/images/bkPage-1.jpg');
-  background-size:cover;
-  height:100%;
-  background-attachment: fixed;
 }
