@@ -22,7 +22,7 @@ export default function App() {
             isActive={current == '/home'}
           >
             <Link
-              color="foreground" href="./home"
+              color="foreground" href="/home"
               style={{ color: current === '/home' ? 'purple' : '' }}
             >
               หน้าแรก
@@ -33,7 +33,7 @@ export default function App() {
           >
             <Link
               color="foreground"
-              href="./addboard"
+              href="/addboard"
               style={{ color: current === '/addboard' ? 'purple' : '' }}
             >
               สร้างบอร์ด
@@ -44,7 +44,7 @@ export default function App() {
             isActive={current == '/search'}
           >
             <Link
-              color="foreground" href="./search"
+              color="foreground" href="/search"
               style={{ color: current === '/search' ? 'purple' : '' }}
             >
               หน้าค้นหา
