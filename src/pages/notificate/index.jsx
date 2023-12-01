@@ -14,7 +14,7 @@ export default function Notification() {
   ]);
 
   function getRandomPhoto() {
-    const photoNames = ['noti1.jpg', 'noti2.jpg', 'noti3.jpg', 'noti4.jpg', 'noti5.jpg', 'noti6.jpg'];
+    const photoNames = ['noti1.jpg', 'noti2.jpg', 'noti3.jpg', 'noti4.jpg', 'noti5.jpg', 'noti6.jpg', 'noti7.jpg', 'noti8.jpg', 'noti9.jpg', 'noti10.jpg', 'noti11.jpg', 'noti12.jpg', 'noti13.jpg' ];
     const randomIndex = Math.floor(Math.random() * photoNames.length);
     return `/photo/${photoNames[randomIndex]}`;
   }
