@@ -22,8 +22,9 @@ export default function App() {
             isActive={current == '/home'}
           >
             <Link
-              color="foreground" href="./home"
-              className={current == '/home' ? 'active-item' : ''}>
+              color="foreground" href="/home"
+              style={{ color: current === '/home' ? 'purple' : '' }}
+            >
               หน้าแรก
             </Link>
           </NavbarItem>
@@ -31,17 +32,20 @@ export default function App() {
             isActive={current == '/addboard'}
           >
             <Link
-              color="foreground" href="./addboard" aria
-              className={current == '/addboard' ? 'active-item' : ''}>
+              color="foreground"
+              href="/addboard"
+              style={{ color: current === '/addboard' ? 'purple' : '' }}
+            >
               สร้างบอร์ด
             </Link>
+
           </NavbarItem>
           <NavbarItem
             isActive={current == '/search'}
           >
             <Link
-              color="foreground" href="./search"
-              className={current == '/search' ? 'active-item' : ''}
+              color="foreground" href="/search"
+              style={{ color: current === '/search' ? 'purple' : '' }}
             >
               หน้าค้นหา
             </Link>
