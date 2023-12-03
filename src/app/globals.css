@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&display=swap');
+
+* {
+  font-family: 'Noto Sans Thai', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+/* mantine */
+
+header {
+  background-color: transparent;
+  background-image: url('/images/bkPage-1.jpg');
+}
+
+
+/* NavBar */
+.item {
+  font-weight: 400;
+}
+
+.Navbar {
+  background-image: none;
+  background-position: top;
+  background-color: transparent;
+  background-repeat: no-repeat;
+
+}
+
+/* page Home */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 94vh;
+  /* ความสูงจะเท่ากับ 100% ของ viewport height */
+}
+
+.content {
+  display: grid;
+  justify-items: center;
+  grid-row: 2;
+}
+
+/* bg */
+.BG-page123 {
+  background-image: url('/images/bkPage-1.jpg');
+  background-size: auto;
+  height: inherit;
+  background-attachment: fixed;
+}
+
+.bgsearch {
+  background-image: url('/images/bgPageSearch.jpg');
+  background-size: auto;
+  height: inherit;
+  background-attachment: fixed;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-image: url('/images/bkPage-1.jpg');
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.cdphoto {
+  height: inherit;
+  border-radius: 2%;
+}
+
+/* src/recommend/Recommend.css */
+.bg {
+  background-image: url('/images/bkPage-1.jpg');
+  background-size: cover;
+  height: inherit;
+  background-attachment: fixed;
+}
+
+.recommend {
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
