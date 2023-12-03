@@ -5,14 +5,14 @@ export const SearchIcon = ({
   width,
   height,
   ...props
-}) => (
+}: { size: number } & React.SVGProps<SVGSVGElement>) => (
   <svg
     fill="none"
     focusable="false"
-    height={height || size}
+    height={height ?? size}
     role="presentation"
     viewBox="0 0 24 24"
-    width={width || size}
+    width={width ?? size}
     {...props}
   >
     <path
@@ -31,4 +31,3 @@ export const SearchIcon = ({
     />
   </svg>
 );
-

@@ -1,10 +1,15 @@
+import { Card, CardHeader, Chip, Image } from "@nextui-org/react";
 import React from "react";
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
-import { Chip } from "@nextui-org/react";
 
-const initialFruits = ["เข้าวัดหวังเอาบุญ เข้าหาคุณหวังเอาหี", "อายุ 15 ตามหารักแท้", "วันไนท์สแตนด์", "นัดเย็ด", "1,500พี่ว่าไง"]
+const initialFruits = [
+  "เข้าวัดหวังเอาบุญ เข้าหาคุณหวังเอาหี",
+  "อายุ 15 ตามหารักแท้",
+  "วันไนท์สแตนด์",
+  "นัดเย็ด",
+  "1,500พี่ว่าไง",
+];
 
-function search({ cardphoto }) {
+function search() {
   const mockData = [
     {
       img: "/photo/Group 11.png",
@@ -30,13 +35,13 @@ function search({ cardphoto }) {
       img: "/photo/Group 16.png",
       title: "เกมออนไลน์",
       text: "เกมยิงปืน เกมต่อสู้",
-    }
+    },
   ];
 
   const [fruits, setFruits] = React.useState(initialFruits);
 
-  const handleClose = (fruitToRemove) => {
-    setFruits(fruits.filter(fruit => fruit !== fruitToRemove));
+  const handleClose = (fruitToRemove: string) => {
+    setFruits(fruits.filter((fruit) => fruit !== fruitToRemove));
     if (fruits.length === 1) {
       setFruits(initialFruits);
     }
@@ -47,10 +52,18 @@ function search({ cardphoto }) {
     const key = `card-${i}`;
     return (
       <div className="flex items-center justify-center">
-        <Card key={key} className="py-4 shadow-none" style={{ backgroundColor: 'rgba(255, 255, 255, 0.0)' }}>
+        <Card
+          key={key}
+          className="py-4 shadow-none"
+          style={{ backgroundColor: "rgba(255, 255, 255, 0.0)" }}
+        >
           <CardHeader className="absolute z-10 top-1 flex-col !items-start text-center md:text-left">
-            <p className="text-[34px] md:text-[34px] lg:text-[50px] text-white uppercase font-normal pt-4">{card.title}</p>
-            <p className="text-[18px] md:text-[24px] lg:text-[24px] text-white font-normal -mt-2 md:-mt-4">{card.text}</p>
+            <p className="text-[34px] md:text-[34px] lg:text-[50px] text-white uppercase font-normal pt-4">
+              {card.title}
+            </p>
+            <p className="text-[18px] md:text-[24px] lg:text-[24px] text-white font-normal -mt-2 md:-mt-4">
+              {card.text}
+            </p>
           </CardHeader>
           <Image
             alt="Card background"
@@ -68,7 +81,12 @@ function search({ cardphoto }) {
       <div className="md:container md:mx-auto">
         <div className="flex flex-col md:flex-row gap-2 pt-6 pl-4 md:pl-16">
           {fruits.map((fruit, index) => (
-            <Chip key={index} onClose={() => handleClose(fruit)} variant="flat" className="bg-white">
+            <Chip
+              key={index}
+              onClose={() => handleClose(fruit)}
+              variant="flat"
+              className="bg-white"
+            >
               {fruit}
             </Chip>
           ))}
@@ -91,7 +109,6 @@ function search({ cardphoto }) {
         </div>
       </div>
     </div>
-
   );
 }
 

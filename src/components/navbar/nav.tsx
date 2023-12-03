@@ -1,51 +1,58 @@
-import React from "react";
-import { Button, Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
-import { AcmeLogo } from "./AcmeLogo.jsx";
-import { SearchIcon } from "./SearchIcon.jsx";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Input,
+  Link,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from "@nextui-org/react";
 import Image from "next/image.js";
+import { usePathname } from "next/navigation.js";
 import Iconmsg from "../../../public/icons/Iconmsg.png";
 import Iconnoti from "../../../public/icons/Iconnoti.png";
-import { usePathname } from "next/navigation.js";
+import { AcmeLogo } from "./AcmeLogo.jsx";
+import { SearchIcon } from "./SearchIcon.jsx";
 
 export default function App() {
   const current = usePathname();
 
   return (
-    <Navbar Navbar maxWidth={'full'} className="Navbar" isBordered>
+    <Navbar maxWidth={"full"} className="Navbar" isBordered>
       <NavbarContent justify="start">
         <NavbarBrand className="mr-4">
           <AcmeLogo />
           <p className="hidden sm:block font-bold text-inherit">ACME</p>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-3">
-          <NavbarItem
-            isActive={current == '/home'}
-          >
+          <NavbarItem isActive={current == "/home"}>
             <Link
-              color="foreground" href="/home"
-              style={{ color: current === '/home' ? 'purple' : '' }}
+              color="foreground"
+              href="/home"
+              style={{ color: current === "/home" ? "purple" : "" }}
             >
               หน้าแรก
             </Link>
           </NavbarItem>
-          <NavbarItem
-            isActive={current == '/addboard'}
-          >
+          <NavbarItem isActive={current == "/addboard"}>
             <Link
               color="foreground"
               href="/addboard"
-              style={{ color: current === '/addboard' ? 'purple' : '' }}
+              style={{ color: current === "/addboard" ? "purple" : "" }}
             >
               สร้างบอร์ด
             </Link>
-
           </NavbarItem>
-          <NavbarItem
-            isActive={current == '/search'}
-          >
+          <NavbarItem isActive={current == "/search"}>
             <Link
-              color="foreground" href="/search"
-              style={{ color: current === '/search' ? 'purple' : '' }}
+              color="foreground"
+              href="/search"
+              style={{ color: current === "/search" ? "purple" : "" }}
             >
               หน้าค้นหา
             </Link>
@@ -59,20 +66,20 @@ export default function App() {
             base: "max-w-full h-10",
             mainWrapper: "h-full",
             input: ["text-small", "bg-transparent", "text-white"],
-            inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 border-white dark:bg-transparent-500/20",
-
+            inputWrapper:
+              "h-full font-normal text-default-500 bg-default-400/20 border-white dark:bg-transparent-500/20",
           }}
           placeholder="Type to search..."
           size="sm"
           radius="full"
           variant="bordered"
-          startContent={<SearchIcon size={18} />}
+          startContent={<SearchIcon size={18} width={18} height={18} />}
           type="search"
         />
-        <Button variant="light" isIconOnly >
+        <Button variant="light" isIconOnly>
           <Image src={Iconnoti} width={28} alt="icon-noti" />
         </Button>
-        <Button variant="light" isIconOnly >
+        <Button variant="light" isIconOnly>
           <Image src={Iconmsg} width={28} alt="icon-noti2" />
         </Button>
         <Dropdown placement="bottom-end">

@@ -23,9 +23,12 @@ const mockData = [
     img: "/photo/pic-1.jpg",
     title: "เกมออนไลน์",
     text: "เกมยิงปืน เกมต่อสู้",
-  }
+  },
 ];
 
-export default function handler(req, res) {
-  res.status(200).json({ mock: mockData });
+import { NextResponse } from "next/server";
+
+
+export async function GET() {
+  return NextResponse.json({ mockData });
 }
