@@ -2,7 +2,7 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-import type { Database } from "#Proj/lib/database.types";
+import type { Database } from '@App/types/database.types';
 import type { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {

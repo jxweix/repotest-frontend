@@ -1,3 +1,4 @@
+"use client"
 import { Card, CardHeader, Chip, Image } from "@nextui-org/react";
 import React from "react";
 

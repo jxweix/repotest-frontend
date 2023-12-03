@@ -1,8 +1,8 @@
+import type { Database } from '@App/types/database.types'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
-import type { Database } from '#Proj/lib/database.types'
 import type { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -12,9 +12,6 @@ export async function GET(request: NextRequest) {
   if (code) {
     const cookieStore = cookies()
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
-    
-    console.log("fdsf",await supabase.auth.getSession());
-    
     await supabase.auth.exchangeCodeForSession(code)
   }
 

@@ -1,3 +1,4 @@
+"use client";
 import {
   Avatar,
   Button,
@@ -13,13 +14,36 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import Image from "next/image.js";
-import { usePathname } from "next/navigation.js";
+import { usePathname, useRouter } from "next/navigation.js";
+
+import { Database } from "@App/types/database.types";
+import {
+  User,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
+import { useEffect, useState } from "react";
 import Iconnoti from "../../../public/icons/Iconnoti.png";
-import { AcmeLogo } from "./AcmeLogo.jsx";
-import { SearchIcon } from "./SearchIcon.jsx";
+import { AcmeLogo } from "./AcmeLogo";
+import { SearchIcon } from "./SearchIcon";
 
 export default function App() {
   const current = usePathname();
+  const router = useRouter();
+  const supabase = createClientComponentClient<Database>();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    })();
+  }, []);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setUser(null)
+    router.refresh();
+  };
 
   return (
     <Navbar maxWidth={"full"} className="Navbar" isBordered>
@@ -89,21 +113,34 @@ export default function App() {
               color="secondary"
               name="Jason Hughes"
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src={`${user?.user_metadata.picture}`}
             />
           </DropdownTrigger>
           <DropdownMenu variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
+              <p className="font-semibold">{user?.email ?? ""}</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
+            <DropdownItem
+              key="settings"
+              onClick={() => {
+                router.push("/auth/signIn?type=google");
+              }}
+            >
+              My Settings
+            </DropdownItem>
             <DropdownItem key="team_settings">Team Settings</DropdownItem>
             <DropdownItem key="analytics">Analytics</DropdownItem>
             <DropdownItem key="system">System</DropdownItem>
             <DropdownItem key="configurations">Configurations</DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger">
+            <DropdownItem
+              key="logout"
+              color="danger"
+              onClick={() => {
+                handleSignOut();
+              }}
+            >
               Log Out
             </DropdownItem>
           </DropdownMenu>
