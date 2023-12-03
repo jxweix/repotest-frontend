@@ -80,7 +80,7 @@ export default function Notification() {
   };
 
   return (
-    <div className="notification-page">
+    <div className="BG-page123">
       <div className="md:container md:mx-auto pt-6">
         <p className="text-[40px] md:text-[60px] text-white font-semibold mb-4 md:mb-0">
           การแจ้งเตือน
