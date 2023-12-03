@@ -14,7 +14,6 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image.js";
 import { usePathname } from "next/navigation.js";
-import Iconmsg from "../../../public/icons/Iconmsg.png";
 import Iconnoti from "../../../public/icons/Iconnoti.png";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { SearchIcon } from "./SearchIcon.jsx";
@@ -76,12 +75,11 @@ export default function App() {
           startContent={<SearchIcon size={18} width={18} height={18} />}
           type="search"
         />
-        <Button variant="light" isIconOnly>
-          <Image src={Iconnoti} width={28} alt="icon-noti" />
-        </Button>
-        <Button variant="light" isIconOnly>
-          <Image src={Iconmsg} width={28} alt="icon-noti2" />
-        </Button>
+        <Link href="/notificate">
+          <Button variant="light" isIconOnly>
+            <Image src={Iconnoti} width={28} alt="icon-noti" />
+          </Button>
+        </Link>
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar

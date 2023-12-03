@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
-import { Card, CardBody, Button ,Image } from '@nextui-org/react';
+import { Card, CardBody, Button, Image, CardFooter, link } from '@nextui-org/react';
 import Images from 'next/image';
-import account from '../../../public/icons/account.png';
+import iconc from '../../../public/icons/icon-c.png';
+import Link from 'next/link';
+
+
 export default function Notification() {
   const [joinedActivities, setJoinedActivities] = useState([
-    { id: 1, name: 'Hiking', image: 'https://i.pinimg.com/564x/a3/75/3d/a3753da6a31b3aa4703308f6dc0d7284.jpg', description: 'Enjoy the beauty of nature while hiking through scenic trails.' },
-    { id: 2, name: 'Biking', image: 'https://i.pinimg.com/564x/e9/66/6d/e9666d5c501e64d9c9374698f0776aa0.jpg', description: 'Explore new places and stay active with biking adventures.' },
-    { id: 3, name: 'Reading', image: 'https://i.pinimg.com/736x/13/c5/dc/13c5dcaa8d8944daadf9d78d949fa7e3.jpg', description: 'Immerse yourself in captivating stories and expand your imagination through reading.' },
-    { id: 4, name: 'Meditation', image: 'https://i.pinimg.com/564x/e6/bb/26/e6bb267c660a0fdda99183e6fc9d2896.jpg', description: 'Find inner peace and balance through meditation practices.' },
-    { id: 5, name: 'Cooking', image: 'https://i.pinimg.com/564x/19/67/dd/1967ddeb64c46314f41e085beafd12a8.jpg', description: 'Unleash your culinary creativity and savor delicious meals through cooking.' },
-    
+    { id: 1, name: 'วันที่ 11/27/2023 08:30 น.', image: getRandomPhoto(), description: 'ไปเรียน' },
+    { id: 2, name: 'วันที่ 11/27/2023 11:50 น.', image: getRandomPhoto(), description: 'ไปตีแบด' },
+    { id: 3, name: 'วันที่ 11/27/2023 17:00 น.', image: getRandomPhoto(), description: 'กลับบ้าน' },
+    { id: 4, name: 'วันที่ 11/27/2023 17:00 น.', image: getRandomPhoto(), description: 'กลับบ้าน' },
+    { id: 5, name: 'วันที่ 11/27/2023 17:00 น.', image: getRandomPhoto(), description: 'กลับบ้าน' },
+    { id: 6, name: 'วันที่ 11/27/2023 17:00 น.', image: getRandomPhoto(), description: 'กลับบ้าน' },
+
   ]);
+
+  function getRandomPhoto() {
+    const photoNames = ['noti1.jpg', 'noti2.jpg', 'noti3.jpg', 'noti4.jpg', 'noti5.jpg', 'noti6.jpg', 'noti7.jpg', 'noti8.jpg', 'noti9.jpg', 'noti10.jpg', 'noti11.jpg', 'noti12.jpg', 'noti13.jpg'];
+    const randomIndex = Math.floor(Math.random() * photoNames.length);
+    return `/photo/${photoNames[randomIndex]}`;
+  }
 
   const handleActivityClick = (activity) => {
     alert(`You selected: ${activity.name}`);
@@ -26,54 +36,56 @@ export default function Notification() {
 
   return (
     <div className="notification-page">
-      <div className="grid grid-rows-1 justify-items-center gap-15">
-        <p className="notification grid row-span-1 text-[28px] text-center from-purple-950 font-semibold">Notification - Joined Activities <br /></p><p>please checking Date Time and Place</p>
-      </div>
-
-      <div className="show grid lg:grid-cols-4 p-10 md:container md:mx-auto gap-20" style={{ minHeight: '100vh' }}>
-        {joinedActivities.map((activity) => (
-          <Card
-            key={activity.id}
-            className="w-[300px] h-[500px] relative bg-grey bg-opacity-30 flip-card gap-20"
-            onClick={() => handleActivityClick(activity)}
-          >
-            <div className="flip-card-inner">
-              <div className="flip-card-front">
-                <Image
-                  removeWrapper
-                  alt={`${activity.name} background`}
-                  className="z-0 w-[300px] h-[500px] object-cover"
-                  src={activity.image}
-                />
-              </div>
-              <div className="flip-card-back">
-                <CardBody className="absolute inset-0 bg-black bg-opacity-80 flex items-center justify-center rounded-md gap-5">
-                  <div className="text-white text-center">
-                    <p className="text-large font-bold">{activity.name}</p>
-                  </div>
-                  <div className="text-white text-center ">
-                    <p className="text-small font-bold">{activity.description}</p>
-                  </div>
-                  <Button color ="danger" variant="light" onClick={() => handleRemoveClick(activity.id)} >
-                    <Images src={account} width={20} alt="icon-noti2" />
-                    Delete Activity
+      <div className="md:container md:mx-auto pt-6">
+        <p className="text-[40px] md:text-[60px] text-white font-semibold mb-4 md:mb-0">การแจ้งเตือน</p>
+        <p className="text-[14px] md:text-[20px] text-white font-semibold -mt-6 mb-4 md:h-20 2xl:md:h-20">ตรวจสอบกิจกรรม วันเวลาของคุณ และการนัดหมายที่คุณรอคอย</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3
+        md:h-auto md:mx-auto 2xl:mx-auto 
+        gap-12 lg:gap-12 md:gap-12 2xl:gap-4
+        justify-items-center " style={{ minHeight: '100vh' }}>
+          {joinedActivities.map((activity) => (
+            <Card
+              key={activity.id}
+              className="w-[200px] h-[250px] md:w-80 md:h-[350px] pl:w-60 pl:h-[150px] 2xl:w-3/4 2xl:h-[400px] rounded-3xl"
+              onClick={() => handleActivityClick(activity)}
+            >
+              <div className="">
+                <div className="">
+                  <Image
+                    removeWrapper
+                    alt={`${activity.name} background`}
+                    className="z-0 w-full  object-cover "
+                    src={activity.image}
+                  />
+                </div>
+                <div>
+                  <CardFooter className="justify-between before:bg-white/30 border-white/40 bg-black/50 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 shadow-2xl w-[160px] h-[60px] md:w-[280px] md:h-[80px]  lg:h-[100px] 2xl:w-[340px] mx-5 z-10">
+                    <p className="text-center font-normal text-[10px] md:text-[20px]  2xl:text-[24px] text-white">{activity.name}<b className='pl-2'>{activity.description}</b></p>
+                    <Link href="/search">
+                      <Button className=" sm:w-[60px] sm:h-[40px] md:w-[80px] md:h-[60px] 2xl:w-[100px] 2xl:h-[80px] font-semibold text-white bg-black/60">
+                        <p className='sm:text-[16px] md:text-[18px] lg:text-[24px] 2xl:text-[32px] font-normal'> Map </p>
+                      </Button>
+                    </Link>
+                  </CardFooter>
+                  <Button className="absolute top-0 right-0 bg-transparent pl-8 mt-5 mr-1 " onClick={() => handleRemoveClick(activity.id)} >
+                    <Images src={iconc} width={35} alt="icon-noti2" />
                   </Button>
-                </CardBody>
+                </div>
               </div>
+            </Card>
+          ))}
+          {joinedActivities.length > 0 && (
+            <div className="text-center">
+              <Button
+                className="bg-white font-semibold fixed top-24 right-10  w-[120px] h-[30px] sm:w-[140px] sm:h-[40px] md:w-[200px] md:h-[50px] "
+                text-corlor="black"
+                onClick={handleRemoveAllClick}
+              >
+                <p className='drop-shadow-2xl text-[12px] sm:text-[14px] md:text-[16px]'> ลบการแจ้งเตือนทั้งหมด </p>
+              </Button>
             </div>
-          </Card>
-        ))}
-        {joinedActivities.length > 0 && (
-        <div className="text-center mt-4">
-          <Button
-            className="fixed bottom-10 right-10"
-            color="danger"
-            onClick={handleRemoveAllClick}
-          >
-            Remove All
-          </Button>
+          )}
         </div>
-      )}
       </div>
     </div>
   );
