@@ -4,7 +4,6 @@ import Images from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import iconc from "../../../public/icons/icon-c.png";
-import './noti.css'; 
 
 function Notification() {
   const [joinedActivities, setJoinedActivities] = useState([
