@@ -4,6 +4,7 @@ import Images from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import iconc from "../../../public/icons/icon-c.png";
+import Snowfall from "../../components/snowfall/Snowfall";
 
 function Notification() {
   const [joinedActivities, setJoinedActivities] = useState([
@@ -151,6 +152,7 @@ function Notification() {
           )}
         </div>
       </div>
+      <Snowfall numSnowflakes={50} />
     </div>
   );
 }
