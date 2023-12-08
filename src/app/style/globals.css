@@ -1,21 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwind.css';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&display=swap');
 
 * {
   font-family: 'Noto Sans Thai', sans-serif;
+  font-weight: 400 ;
   padding: 0;
   margin: 0;
 }
 
-/* mantine */
+.test{
+  font-family: 'Noto Sans Thai', sans-serif;
+}
 
+/* mantine */
 header {
   background-color: transparent;
   background-image: url('/images/bkPage-1.jpg');
 }
-
 
 /* NavBar */
 .item {
