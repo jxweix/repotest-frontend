@@ -78,7 +78,7 @@ export default function App() {
             <NavbarItem isActive={current == "/addboard"}>
               <Link
                 color="foreground"
-                href="/addboard"
+                href="/board/addboard"
                 style={{ color: current === "/addboard" ? "purple" : "" }}
               >
                 สร้างบอร์ด

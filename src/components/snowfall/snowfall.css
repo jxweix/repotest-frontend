@@ -1,0 +1,29 @@
+.snowfall {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0.8;
+  }
+  
+  .snowflake {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: snowfall linear infinite;
+  }
+  
+  @keyframes snowfall {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
+  }
+  
