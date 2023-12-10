@@ -5,9 +5,7 @@ import Image from 'next/image';
 
 export default function addboard() {
   const [image, setImage] = useState<any>([{}]);
-  console.log("🚀 ~ file: page.tsx:8 ~ addboard ~ image:", image)
   const [createObjectURL, setCreateObjectURL] = useState<any>([]);
-  console.log("🚀 ~ file: page.tsx:10 ~ addboard ~ createObjectURL:", createObjectURL)
   const [formData, setFormData] = useState({
     nameboard: '',
     detail: '',
@@ -44,7 +42,6 @@ export default function addboard() {
   };
 
   const handleSubmit = async () => {
-    console.log("🚀 ~ file: page.tsx:47 ~ handleSubmit ~ formData:", formData)
     try {
       const response = await fetch('/api/your-endpoint', {
         method: 'POST',
@@ -73,7 +70,7 @@ export default function addboard() {
           <div className='grid grid-cols-2'>
             <div className='grid'>
               <Input type="file" name="myImage" onChange={uploadToClient}></Input>
-              {createObjectURL.map((img, i): any => (
+              {createObjectURL.map((img: any, i: number) => (
                 <Image key={i} src={img} alt={`Object URL ${i}`} width={150} height={200} />
               ))}
             </div>
