@@ -1,7 +1,10 @@
+'use client'
 import React from 'react'
 
-export default function allboard() {
+export default function page() {
   return (
-    <div>allboard</div>
+    <div>
+      all board
+    </div>
   )
 }
