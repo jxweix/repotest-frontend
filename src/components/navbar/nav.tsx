@@ -53,7 +53,7 @@ export default function App() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null)
-    router.push('/home');
+    router.push('/');
     setTimeout(() => {
       router.refresh();
       window.location.reload();
