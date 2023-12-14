@@ -24,12 +24,11 @@ registerPlugin(
   //   FilePondPluginImageCrop,
   //   FilePondPluginImageTransform
 );
-
 // Our app
 export function FilePondComponent() {
   const [files, setFiles] = useState([]);
   // console.log("files", files);
-  let pond = null;
+  let pond:any = null;
 
   const onSubmit = () => {
     const formData = new FormData();
@@ -66,14 +65,14 @@ export function FilePondComponent() {
       // });
 
       const files = pond.getFiles();
-      files.forEach((file) => {
+      files.forEach((file:any) => {
         console.log("each file", file, file.getFileEncodeBase64String());
       });
 
       pond
         .processFiles(files)
-        .then((res) => console.log(res))
-        .catch((error) => console.log("err", error));
+        .then((res:any) => console.log(res))
+        .catch((error:any) => console.log("err", error));
     }
   };
 
@@ -94,37 +93,37 @@ export function FilePondComponent() {
             resolve(type);
           })
         }
-        allowFileEncode
-        allowImageTransform
+        // allowFileEncode
+        // allowImageTransform
         imagePreviewHeight={400}
-        imageCropAspectRatio={"1:1"}
-        imageResizeTargetWidth={100}
-        imageResizeTargetHeight={100}
-        imageResizeMode={"cover"}
-        imageTransformOutputQuality={50}
-        imageTransformOutputQualityMode="optional"
-        imageTransformBeforeCreateBlob={(canvas: any) =>
-          new Promise((resolve) => {
-            // Do something with the canvas, like drawing some text on it
-            const ctx = canvas.getContext("2d");
-            ctx.font = "48px serif";
-            ctx.fillText("Hello world", 10, 50);
+        // imageCropAspectRatio={"1:1"}
+        // imageResizeTargetWidth={100}
+        // imageResizeTargetHeight={100}
+        // imageResizeMode={"cover"}
+        // imageTransformOutputQuality={50}
+        // imageTransformOutputQualityMode="optional"
+        // imageTransformBeforeCreateBlob={(canvas: any) =>
+        //   new Promise((resolve) => {
+        //     // Do something with the canvas, like drawing some text on it
+        //     const ctx = canvas.getContext("2d");
+        //     ctx.font = "48px serif";
+        //     ctx.fillText("Hello world", 10, 50);
 
-            console.log("imageTransformBeforeCreateBlob", ctx, canvas);
+        //     console.log("imageTransformBeforeCreateBlob", ctx, canvas);
 
-            // return canvas to the plugin for further processing
-            resolve(canvas);
-          })
-        }
-        imageTransformAfterCreateBlob={(blob: any) =>
-          new Promise((resolve) => {
-            // do something with the blob, for instance send it to a custom compression alogrithm
-            console.log("imageTransformAfterCreateBlob", blob);
+        //     // return canvas to the plugin for further processing
+        //     resolve(canvas);
+        //   })
+        // }
+        // imageTransformAfterCreateBlob={(blob: any) =>
+        //   new Promise((resolve) => {
+        //     // do something with the blob, for instance send it to a custom compression alogrithm
+        //     console.log("imageTransformAfterCreateBlob", blob);
 
-            // return the blob to the plugin for further processing
-            resolve(blob);
-          })
-        }
+        //     // return the blob to the plugin for further processing
+        //     resolve(blob);
+        //   })
+        // }
         // onupdatefiles={setFiles}
         instantUpload={false}
         allowMultiple={true}
