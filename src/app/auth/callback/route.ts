@@ -12,9 +12,13 @@ export async function GET(request: NextRequest) {
   if (code) {
     const cookieStore = cookies()
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
-    await supabase.auth.exchangeCodeForSession(code)
-  }
+    const response = await supabase.auth.exchangeCodeForSession(code)
 
+    if (response.error) {
+      return NextResponse.redirect(`${requestUrl.origin}/allboard`)
+    }
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(`${requestUrl.origin}/board`)
+    return NextResponse.redirect(`${requestUrl.origin}/board`)
+  }
+  return NextResponse.redirect(`${requestUrl.origin}/`)
 }
