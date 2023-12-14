@@ -32,6 +32,7 @@ import google from '../../../public/icons/google.png'
 import github from '../../../public/icons/github.png'
 import { AcmeLogo } from "./AcmeLogo";
 import { SearchIcon } from "./SearchIcon";
+import { IconCreate, IconEdit } from "./Icons";
 
 export default function App() {
   const current = usePathname();
@@ -39,6 +40,9 @@ export default function App() {
   const supabase = createClientComponentClient<Database>();
   const [user, setUser] = useState<User | null>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0";
+
   useEffect(() => {
     (async () => {
       const { data } = await supabase.auth.getUser();
@@ -49,7 +53,7 @@ export default function App() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null)
-    router.push('/home');
+    router.push('/');
     setTimeout(() => {
       router.refresh();
       window.location.reload();
@@ -75,14 +79,35 @@ export default function App() {
                 หน้าแรก
               </Link>
             </NavbarItem>
-            <NavbarItem isActive={current == "/addboard"}>
-              <Link
-                color="foreground"
-                href="/board/addboard"
-                style={{ color: current === "/addboard" ? "purple" : "" }}
-              >
-                สร้างบอร์ด
-              </Link>
+            <NavbarItem>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    className="text-[16px] bg-transparent"
+                    disableRipple
+                  >
+                    จัดการบอร์ด
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu className="w-[300px] max-w-[350px]" variant="faded">
+                  <DropdownItem
+                    key="Create"
+                    href="/board/addboard"
+                    description="สร้างบอร์ด เพื่อสร้างกิจกรรมใหม่ๆ"
+                    startContent={<IconCreate className={iconClasses} />}
+                  >
+                    สร้างบอร์ด
+                  </DropdownItem>
+                  <DropdownItem
+                    key="Detail"
+                    href="/board/allboard"
+                    description="ดูบอร์ด และจัดการบอร์ดทั้งหมดของคุณ"
+                    startContent={<IconEdit className={iconClasses} />}
+                  >
+                    บอร์ดทั้งหมด
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </NavbarItem>
             <NavbarItem isActive={current == "/search"}>
               <Link
