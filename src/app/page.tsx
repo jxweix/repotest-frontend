@@ -1,13 +1,14 @@
 "use client"
 import { Button, Modal, ModalContent, ModalBody, ModalHeader, useDisclosure } from "@nextui-org/react";
 import Image from 'next/image';
-import router from "next/router";
 import discord from '../../public/icons/discord.png'
 import google from '../../public/icons/google.png'
 import github from '../../public/icons/github.png'
+import { useRouter } from "next/navigation";
 
 function page() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const router = useRouter();
 
   return (
     <div className="BG-page123">
