@@ -8,8 +8,6 @@ import type { NextRequest } from 'next/server'
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
   const protocol = request.headers.get("x-forwarded-proto") || "http";
-  console.log("🚀 ~ file: route.ts:11 ~ GET ~ protocol:", protocol)
-  console.log("🚀 ~ file: route.ts:10 ~ GET ~ requestUrl:", requestUrl)
   const code = requestUrl.searchParams.get('code')
 
   if (code) {
