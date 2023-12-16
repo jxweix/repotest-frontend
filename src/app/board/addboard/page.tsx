@@ -73,8 +73,8 @@ export default function addboard() {
   return (
     <div className='bgsearch'>
       <Snowfall numSnowflakes={50} />
-      <div className='md:container md:mx-auto pt-6'>
-        <div className='grid grid-row-3'>
+      <div className='md:container md:mx-auto pt-6 '>
+        <div className='grid grid-row-3 pl-[7vh]'>
           <p className="text-[40px] md:text-[60px] text-gray-700 font-semibold mb-4 md:mb-0 pr-96">
             สร้างบอร์ด
           </p>
