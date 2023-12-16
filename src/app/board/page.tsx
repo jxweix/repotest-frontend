@@ -36,7 +36,6 @@ function boardHome() {
       </CardHeader>
       <Image className='imgcard' src={img.src} alt='photo' width={590} height={590} />
     </Card >
-
   ));
 
   return (
