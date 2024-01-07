@@ -4,8 +4,9 @@ import Images from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import iconc from "../../../public/icons/icon-c.png";
+import Snowfall from "../../components/snowfall/Snowfall";
 
-export default function Notification() {
+function Notification() {
   const [joinedActivities, setJoinedActivities] = useState([
     {
       id: 1,
@@ -80,7 +81,7 @@ export default function Notification() {
   };
 
   return (
-    <div className="notification-page">
+    <div className="BG-page123">
       <div className="md:container md:mx-auto pt-6">
         <p className="text-[40px] md:text-[60px] text-white font-semibold mb-4 md:mb-0">
           การแจ้งเตือน
@@ -98,7 +99,7 @@ export default function Notification() {
           {joinedActivities.map((activity) => (
             <Card
               key={activity.id}
-              className="w-[200px] h-[250px] md:w-80 md:h-[350px] pl:w-60 pl:h-[150px] 2xl:w-3/4 2xl:h-[400px] rounded-3xl"
+              className="cardnoti w-[200px] h-[250px] md:w-80 md:h-[350px] pl:w-60 pl:h-[150px] 2xl:w-3/4 2xl:h-[400px] rounded-3xl"
               onClick={() => handleActivityClick(activity)}
             >
               <div className="">
@@ -117,7 +118,7 @@ export default function Notification() {
                       <b className="pl-2">{activity.description}</b>
                     </p>
                     <Link href="/search">
-                      <Button className=" sm:w-[60px] sm:h-[40px] md:w-[80px] md:h-[60px] 2xl:w-[100px] 2xl:h-[80px] font-semibold text-white bg-black/60">
+                      <Button className=" gonoti sm:w-[60px] sm:h-[40px] md:w-[80px] md:h-[60px] 2xl:w-[100px] 2xl:h-[80px] font-semibold text-white bg-black/60">
                         <p className="sm:text-[16px] md:text-[18px] lg:text-[24px] 2xl:text-[32px] font-normal">
                           {" "}
                           Map{" "}
@@ -138,7 +139,7 @@ export default function Notification() {
           {joinedActivities.length > 0 && (
             <div className="text-center">
               <Button
-                className="bg-white font-semibold fixed top-24 right-10  w-[120px] h-[30px] sm:w-[140px] sm:h-[40px] md:w-[200px] md:h-[50px] "
+                className="buttonnoti font-semibold fixed top-24 right-10  w-[120px] h-[30px] sm:w-[140px] sm:h-[40px] md:w-[200px] md:h-[50px] "
                 text-corlor="black"
                 onClick={handleRemoveAllClick}
               >
@@ -151,6 +152,9 @@ export default function Notification() {
           )}
         </div>
       </div>
+      <Snowfall numSnowflakes={50} />
     </div>
   );
 }
+
+export default Notification;
