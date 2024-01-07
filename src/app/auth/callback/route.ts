@@ -7,14 +7,16 @@ import type { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url)
+  const protocol = request.headers.get("x-forwarded-proto") || "http";
   const code = requestUrl.searchParams.get('code')
 
   if (code) {
     const cookieStore = cookies()
     const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
     await supabase.auth.exchangeCodeForSession(code)
-  }
 
-  // URL to redirect to after sign in process completes
-  return NextResponse.redirect(requestUrl.origin)
+    // URL to redirect to after sign in process completes
+    // return NextResponse.redirect(`${requestUrl.origin}/board`)
+    return NextResponse.redirect(`${protocol}://${requestUrl.host}/board`)
+  }
 }
