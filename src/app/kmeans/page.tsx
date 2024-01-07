@@ -6,7 +6,7 @@ export default function Recommend() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:3000/user_id/'+userId);
+      const response = await fetch('http://127.0.0.1:8000/user_id/'+userId);
       const data = await response.json();
       console.log(data); // Process the data as needed
       setRecommendations(data.message);

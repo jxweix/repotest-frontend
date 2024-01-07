@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000","http://127.0.0.1:3000"],  # Add your React app's origin
+    allow_origins=["*"],  # Add your React app's origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -19,7 +19,7 @@ app.add_middleware(
 
 SUPABASE_ENDPOINT = "https://iqdyhkjgaaimariweutv.supabase.co"
 SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxZHloa2pnYWFpbWFyaXdldXR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDE2MTAyMzcsImV4cCI6MjAxNzE4NjIzN30.X5HdI7Qew8UH9AzMeEJLTQPSIIX5ntDuGk1-6rMlBpw"
-TABLE_NAME = 'user_activities'
+TABLE_NAME = 'user_activity'
 
 def fetch_data():
     with httpx.Client() as client:  # Use httpx.Client instead of httpx.AsyncClient
@@ -38,7 +38,7 @@ def load_data():
     return pd.DataFrame(data)
 
 def create_user_item_matrix(data):
-    user_item_matrix = data.groupby(['user_id', 'activities_id']).size().unstack(fill_value=0)
+    user_item_matrix = data.groupby(['user_id', 'activity_id']).size().unstack(fill_value=0)
     # print("User-item matrix:\n", user_item_matrix)
     return user_item_matrix
 
