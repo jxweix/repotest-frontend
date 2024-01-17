@@ -1,4 +1,3 @@
-
 // npm install react-filepond filepond --save
 import React, { useState, useEffect } from "react";
 import { FilePond, registerPlugin } from "react-filepond";
@@ -12,6 +11,10 @@ import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 // import FilePondPluginImageResize from "filepond-plugin-image-resize";
 // import FilePondPluginImageCrop from "filepond-plugin-image-crop";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@App/types/database.types";
+import { v4 as uuidv4 } from 'uuid';
+
 
 // Register the plugins
 registerPlugin(
@@ -28,7 +31,7 @@ registerPlugin(
 export function FilePondComponent() {
   const [files, setFiles] = useState([]);
   // console.log("files", files);
-  let pond:any = null;
+  let pond: any = null;
 
   const onSubmit = () => {
     const formData = new FormData();
@@ -65,14 +68,14 @@ export function FilePondComponent() {
       // });
 
       const files = pond.getFiles();
-      files.forEach((file:any) => {
+      files.forEach((file: any) => {
         console.log("each file", file, file.getFileEncodeBase64String());
       });
 
       pond
         .processFiles(files)
-        .then((res:any) => console.log(res))
-        .catch((error:any) => console.log("err", error));
+        .then((res: any) => console.log(res))
+        .catch((error: any) => console.log("err", error));
     }
   };
 
@@ -128,7 +131,32 @@ export function FilePondComponent() {
         instantUpload={false}
         allowMultiple={true}
         maxFiles={3}
-        server="https://httpbin.org/post"
+        server={{
+          process: async (fieldName, file, metadata, load, error, progress, abort) => {
+            try {
+              const supabase = createClientComponentClient<Database>()
+              const fileExtension = file.name.split('.').pop();
+
+              const { data, error } = await supabase.storage
+                .from('upload')
+                .upload(`public/${uuidv4()}.${fileExtension}`, file, {
+                  cacheControl: '3600',
+                  upsert: false,
+                });
+
+              if (data) {
+                // การอัปโหลดสำเร็จ
+                load(data);
+              } else {
+                // การอัปโหลดไม่สำเร็จ
+                console.log('error server', error);
+              }
+            } catch (e) {
+              // การอัปโหลดไม่สำเร็จ
+              console.log('error catch server', e);
+            }
+          },
+        }}
         name="files"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
       />
