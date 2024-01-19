@@ -4,19 +4,19 @@ import { CheckIcon } from './checkIcon'
 
 const checkbox = tv({
     slots: {
-        base: "border-default hover:bg-default-200",
-        content: "text-default-500"
+        base: "border-default hover:bg-default-200 border-[1px] p-4",
+        content: "text-black"
     },
     variants: {
         isSelected: {
             true: {
-                base: "border-primary bg-primary hover:bg-primary-500 hover:border-primary-500",
-                content: "text-primary-foreground pl-1"
+                base: "border-violet-700 bg-violet-300 hover:bg-cyan-200 hover:border-violet-500 border-[1px]",
+                content: "text-black-foreground pl-1"
             }
         },
         isFocusVisible: {
             true: {
-                base: "outline-none ring-2 ring-focus ring-offset-2 ring-offset-background",
+                base: "outline-none ring- ring-focus ring-offset-2 ring-offset-background",
             }
         }
     }
@@ -43,10 +43,10 @@ export const CustomCheckbox = (props:any) => {
             </VisuallyHidden>
             <Chip
                 classNames={{
-                    base: styles.base(),
+                     base: styles.base(),
                     content: styles.content(),
                 }}
-                color="primary"
+                color="success"
                 startContent={isSelected ? <CheckIcon className="ml-1" /> : null}
                 variant="faded"
                 {...getLabelProps()}
