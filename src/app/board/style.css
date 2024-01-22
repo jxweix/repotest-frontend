@@ -1,0 +1,54 @@
+.imgcard {
+  max-width: 100%;
+  display: block;
+}
+
+.figure {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 15px;
+  break-inside: avoid;
+}
+
+.figure>.imgcard {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+
+.figure a {
+  text-decoration: none;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 1vh;
+}
+
+.container {
+  column-count: 4;
+  gap: 15px;
+}
+
+.figure:hover .Header {
+  opacity: 1;
+}
+
+.Header {
+  filter: invert(.1);
+  opacity: 0;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  mix-blend-mode: screen;
+}
+
+.Item-hidden{
+  background-color: transparent;
+  mix-blend-mode: screen;
+  filter: invert(100%);
+}
