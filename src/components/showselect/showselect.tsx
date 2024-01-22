@@ -13,18 +13,18 @@ export default function showselect() {
     const path = usePathname();
     const supabase = createClientComponentClient<Database>();
     const [errorMessage] = useState('สามารถเลือกได้แค่ 5 Tag')
-    const [getUserid, setGetUserid] = useState<String>();
+    const [getUserid, setGetUserid] = useState<any>([]);
+
     const router = useRouter();
 
     useEffect(() => {
         (async () => {
-            const id = await supabase.auth.getUser()
-            if (id) {
-                const data = id.data.user?.id
-                setGetUserid(data)
-            }
-
             try {
+                const id = await supabase.auth.getUser()
+                if (id) {
+                    setGetUserid(id.data.user?.id)
+                }
+
                 let { data: typetbl } = await supabase
                     .from('typetbl')
                     .select('*')
@@ -37,11 +37,12 @@ export default function showselect() {
                 console.log("data error typetbl : ", error?.message);
             }
 
+
             if (path == '/select') {
                 onOpen();
             }
         })()
-    }, [path, onOpen])
+    }, [path, onOpen, getUserid])
 
     const handleCheckboxChange = (value: any) => {
         if (value.length <= 5) {
@@ -49,47 +50,22 @@ export default function showselect() {
         }
     }
 
-    // const handleCheckClick = async () => {
-    //     if (groupSelected && groupSelected?.length == 5) {
-    //         try {
-    //             let { data: upsert, error } = await supabase
-    //                 .from('userConjoin_front')
-    //                 .upsert([
-    //                     {
-    //                         id: getUserid,
-    //                         conJoin: groupSelected,
-    //                     }
-    //                 ])
-    //             if (error) {
-    //                 console.log('error upsert', error);
-    //                 alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
-    //             }
-    //             else {
-    //                 console.log("data succ this data: ", groupSelected);
-    //             }
-    //         } catch (error) {
-    //             console.log("error catch", error);
-    //         }
-    //     }
-    // }
-
     const handleCheckClick = async () => {
         if (groupSelected && groupSelected?.length == 5) {
             try {
                 let { data: upsert, error } = await supabase
                     .from('userConjoin_front')
-                    .upsert([
-                        {
-                            id: getUserid,
-                            conJoin: groupSelected,
-                        }
-                    ])
+                    .update({
+                        conJoin: groupSelected,
+                    })
+                    .eq('id' , getUserid);
                 if (error) {
                     console.log('error upsert', error);
                     alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
                 }
                 else {
                     console.log("data succ this data: ", groupSelected);
+                    alert('บันทึกข้อมูลเรียบร้อยแล้ว')
                     router.push('/board')
                 }
             } catch (error) {
@@ -101,8 +77,8 @@ export default function showselect() {
     return (
         <>
             <Modal
-                // backdrop='blur'
-                backdrop='transparent'
+                backdrop='blur'
+                // backdrop='transparent'
                 className='max-w-[57vh] h-auto'
                 isOpen={isOpen}
                 hideCloseButton
@@ -145,17 +121,14 @@ export default function showselect() {
                                 </CheckboxGroup>
 
                             </ModalBody>
-                            <ModalFooter className='grid-cols-5 grid items-center'>
-                                <p className="grid col-span-4 ml-1 text-default-500">
-                                    Selected: {groupSelected.join(", ")}
-                                </p>
-                                <div className='grid col-span-1'>
+                            <ModalFooter className='flex items-center'>
+                                <div className='flex justify-items-end col-span-1'>
                                     <Button
                                         radius='full'
                                         className='bg-violet-300 border-[1px] border-violet-500'
                                         onClick={handleCheckClick}
                                     >
-                                        button stupid
+                                        Confirm
                                     </Button>
                                 </div>
                             </ModalFooter>
