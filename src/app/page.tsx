@@ -22,38 +22,37 @@ function page() {
         let { data: userConjoin_conJoin } = await supabase
           .from('userConjoin_front')
           .select('conJoin')
-          .eq('id',data.user.id);
+          .eq('id', data.user.id);
         if (data) {
           const newData = {
-            id_upsert: data.user.id,
+            id: data.user.id,
           }
-          const check = userConjoin_conJoin
+          const check = await userConjoin_conJoin
           const { data: upsertData, error } = await supabase
             .from('userConjoin_front')
             .upsert([
               {
-                id: data.user.id,
                 ...newData,
               },
             ]);
-            if (check?.every(item => item.conJoin == null)) {
-              router.push('./select')
-            }
-            if (check?.every(item => item.conJoin !== null)) {
-              router.push('/board')
-            }
 
+          // ทดสอบ upsertData 
           if (error) {
             console.error('Error upserting data:', error);
           }
           else {
             console.log('Data upserted successfully:', upsertData);
           }
+
+          if (check && check.length > 0 && check[0].conJoin !== null) {
+            router.push('/board')
+          } else {
+            router.push('select')
+          }
         }
       }
     })()
   }, [])
-
 
   return (
     <div className="BG-page123">
