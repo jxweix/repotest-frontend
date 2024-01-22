@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, CheckboxGroup, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow, useDisclosure } from "@nextui-org/react";
 import { CustomCheckbox } from "./customCheckbox";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '@App/types/database.types';
-import { Notification } from '@mantine/core';
-import getUserConJoinByID from '@App/actions/getUserConjoinByID';
 
 export default function showselect() {
     const [groupSelected, setGroupSelected] = useState<string[]>([]);
@@ -16,6 +14,7 @@ export default function showselect() {
     const supabase = createClientComponentClient<Database>();
     const [errorMessage] = useState('สามารถเลือกได้แค่ 5 Tag')
     const [getUserid, setGetUserid] = useState<String>();
+    const router = useRouter();
 
     useEffect(() => {
         (async () => {
@@ -24,12 +23,6 @@ export default function showselect() {
                 const data = id.data.user?.id
                 setGetUserid(data)
             }
-            if (id.data.user?.id) {
-                const conJoinData = await getUserConJoinByID(id.data.user?.id)
-                console.log("conJoinData", conJoinData);
-
-            }
-
 
             try {
                 let { data: typetbl } = await supabase
@@ -97,6 +90,7 @@ export default function showselect() {
                 }
                 else {
                     console.log("data succ this data: ", groupSelected);
+                    router.push('/board')
                 }
             } catch (error) {
                 console.log("error catch", error);
@@ -106,9 +100,6 @@ export default function showselect() {
 
     return (
         <>
-            <Notification className='z-60' title="We notify you that">
-                You are now obligated to give a star to Mantine project on GitHub
-            </Notification>
             <Modal
                 // backdrop='blur'
                 backdrop='transparent'
