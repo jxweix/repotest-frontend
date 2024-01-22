@@ -12,6 +12,8 @@ import { keys } from "@mantine/core";
 import { json } from "stream/consumers";
 
 function BoardHome() {
+  const [userId, setUserId] = useState<any>([]);
+  const [recommendations, setRecommendations] = useState<any>([]);
   const [user, setUser] = useState<User | null>(null);
   const [boardData, setBoardData] = useState<any>([]);
   const [srcData, setSrcData] = useState<any>([]);
@@ -23,6 +25,17 @@ function BoardHome() {
       const { data } = await supabase.auth.getUser();
       setUser(data.user);
       console.log("user ID is:", data.user?.id);
+
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/user_id" + data.user?.id
+        );
+        const datares = await response.json();
+        console.log("data response:", datares);
+        setRecommendations(datares.message);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
 
       try {
         // Fetch data from joinBoardtbl
@@ -100,5 +113,4 @@ function BoardHome() {
     </div>
   );
 }
-
 export default BoardHome;

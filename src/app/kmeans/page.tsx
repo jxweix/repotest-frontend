@@ -1,17 +1,17 @@
-"use client"
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 export default function Recommend() {
   const [userId, setUserId] = useState(1);
-  const [recommendations, setRecommendations] = useState('');
+  const [recommendations, setRecommendations] = useState("");
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/user_id/'+userId);
+      const response = await fetch("http://127.0.0.1:8000/user_id/" + userId);
       const data = await response.json();
       console.log(data); // Process the data as needed
       setRecommendations(data.message);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
