@@ -145,17 +145,14 @@ export default function showselect() {
                                 </CheckboxGroup>
 
                             </ModalBody>
-                            <ModalFooter className='grid-cols-5 grid items-center'>
-                                <p className="grid col-span-4 ml-1 text-default-500">
-                                    Selected: {groupSelected.join(", ")}
-                                </p>
-                                <div className='grid col-span-1'>
+                            <ModalFooter className='flex items-center'>
+                                <div className='flex justify-items-end col-span-1'>
                                     <Button
                                         radius='full'
                                         className='bg-violet-300 border-[1px] border-violet-500'
                                         onClick={handleCheckClick}
                                     >
-                                        button stupid
+                                        Confirm
                                     </Button>
                                 </div>
                             </ModalFooter>
