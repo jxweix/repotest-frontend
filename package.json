@@ -13,6 +13,7 @@
     "@mantine/core": "^7.2.2",
     "@nextui-org/react": "^2.2.9",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
+    "@supabase/ssr": "^0.0.10",
     "embla-carousel-react": "^7.1.0",
     "filepond": "^4.30.4",
     "filepond-plugin-file-validate-size": "^2.2.8",

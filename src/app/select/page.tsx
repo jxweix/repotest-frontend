@@ -4,8 +4,8 @@ import Showselect from "@components/showselect/showselect"
 function home() {
     return (
         <div className="BG-page123">
-            <div className="wrapper">
-               <Showselect/>
+            <div className="wrapper justify-end items-start">
+                <Showselect />
             </div>
         </div>
     );
