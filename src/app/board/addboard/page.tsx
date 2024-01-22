@@ -96,6 +96,7 @@ export default function addboard() {
                 > */}
 
                   <FilePondComponent />
+                  {/* <UploadClass /> */}
                   {/* {createObjectURL.map((img: any, i: number) => (
                   <Image key={i} src={img} alt={`Object URL ${i}`} width={150} height={200} />
                 ))} */}

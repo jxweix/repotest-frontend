@@ -13,6 +13,7 @@
     "@mantine/core": "^7.2.2",
     "@nextui-org/react": "^2.2.9",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
+    "@supabase/ssr": "^0.0.10",
     "embla-carousel-react": "^7.1.0",
     "filepond": "^4.30.4",
     "filepond-plugin-file-validate-size": "^2.2.8",
@@ -25,12 +26,14 @@
     "react": "^18",
     "react-dom": "^18",
     "react-filepond": "^7.1.2",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.4.16",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",

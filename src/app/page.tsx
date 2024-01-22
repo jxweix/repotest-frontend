@@ -12,10 +12,54 @@ import discord from "../../public/icons/discord.png";
 import google from "../../public/icons/google.png";
 import github from "../../public/icons/github.png";
 import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@App/types/database.types";
+import { useEffect } from "react";
 
 function page() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
+
+  const supabase = createClientComponentClient<Database>()
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.auth.getUser()
+      if (data?.user !== null) {
+        let { data: userConjoin_conJoin } = await supabase
+          .from('userConjoin_front')
+          .select('conJoin')
+          .eq('id', data.user.id);
+        if (data) {
+          const newData = {
+            id: data.user.id,
+          }
+          const check = await userConjoin_conJoin
+          const { data: upsertData, error } = await supabase
+            .from('userConjoin_front')
+            .upsert([
+              {
+                ...newData,
+              },
+            ]);
+
+          // ทดสอบ upsertData 
+          if (error) {
+            console.error('Error upserting data:', error);
+          }
+          else {
+            console.log('Data upserted successfully:', upsertData);
+          }
+
+          if (check && check.length > 0 && check[0].conJoin !== null) {
+            router.push('/board')
+          } else {
+            router.push('select')
+          }
+        }
+      }
+    })()
+  }, [])
 
   return (
     <div className="BG-page123">

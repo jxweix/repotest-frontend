@@ -26,9 +26,11 @@ const mockData = [
   },
 ];
 
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 
 export async function GET() {
-  return NextResponse.json({ mockData });
+  const coockies =cookies().getAll()
+  return NextResponse.json({ coockie:coockies });
 }
