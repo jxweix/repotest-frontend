@@ -109,13 +109,13 @@ export default function App() {
                 </DropdownMenu>
               </Dropdown>
             </NavbarItem>
-            <NavbarItem isActive={current == "/search"}>
+            <NavbarItem isActive={current == "/allactivity"}>
               <Link
                 color="foreground"
-                href="/search"
-                style={{ color: current === "/search" ? "purple" : "" }}
+                href="/allactivity"
+                style={{ color: current === "/allactivity" ? "purple" : "" }}
               >
-                หน้าค้นหา
+                ประเภทของกิจกรรม
               </Link>
             </NavbarItem>
           </NavbarContent>
@@ -162,7 +162,7 @@ export default function App() {
               <DropdownItem key="text">
                 <p className="text-[14px]">เข้าสู่ระบบอยู่</p>
               </DropdownItem>
-              <DropdownItem key="profile" className="h-20 gap-2">
+              <DropdownItem key="profile" className="h-20 shadow-lg  gap-2">
                 <div className="grid-cols-4 grid items-center">
                   <div className="grid col-span-1 justify-center">
                     <Avatar
@@ -178,6 +178,15 @@ export default function App() {
                     <p className="text-[14px] font-semibold">{user?.email ?? ""}</p>
                   </div>
                 </div>
+              </DropdownItem>
+              <DropdownItem
+                key="changeSelect"
+                variant="flat"
+                onClick={() => {
+                  router.push('/select')
+                }}
+              >
+                Change Favorite
               </DropdownItem>
               <DropdownItem
                 key="logout"

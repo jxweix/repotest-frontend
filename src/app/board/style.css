@@ -52,3 +52,9 @@
   mix-blend-mode: screen;
   filter: invert(100%);
 }
+
+.chip {
+  opacity: 1;
+  background-color: rgb(156, 161, 11);
+  color: white;
+}
