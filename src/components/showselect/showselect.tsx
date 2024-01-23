@@ -8,7 +8,8 @@ import { Database } from '@App/types/database.types';
 
 export default function showselect() {
     const [groupSelected, setGroupSelected] = useState<string[]>([]);
-    const [dataTypes, setdataType] = useState<any>([]);
+    const [dataTypes, setDataType] = useState<any>([]);
+    console.log("🚀 ~ showselect ~ dataTypes:", dataTypes)
     const { isOpen, onOpen } = useDisclosure();
     const path = usePathname();
     const supabase = createClientComponentClient<Database>();
@@ -29,15 +30,11 @@ export default function showselect() {
                     .from('typetbl')
                     .select('*')
                 if (typetbl) {
-                    setdataType(typetbl)
+                    setDataType(typetbl)
                 }
-
-
             } catch (error: any) {
                 console.log("data error typetbl : ", error?.message);
             }
-
-
             if (path == '/select') {
                 onOpen();
             }
@@ -58,7 +55,7 @@ export default function showselect() {
                     .update({
                         conJoin: groupSelected,
                     })
-                    .eq('id' , getUserid);
+                    .eq('id', getUserid);
                 if (error) {
                     console.log('error upsert', error);
                     alert('เกิดข้อผิดพลาดในการบันทึกข้อมูล');
@@ -73,69 +70,70 @@ export default function showselect() {
             }
         }
     }
-
-    return (
-        <>
-            <Modal
-                backdrop='blur'
-                // backdrop='transparent'
-                className='max-w-[57vh] h-auto'
-                isOpen={isOpen}
-                hideCloseButton
-            >
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader
-                                className='bg-white pb-2'
-                                style={{
-                                    backgroundImage: "none",
-                                    textAlign: "center",
-                                }}
-                            >
-                                <p className='w-full text-[20px]'>เลือกประเภทกิจกรรมที่คุณสนใจ</p>
-                            </ModalHeader>
-                            <ModalBody>
-                                <CheckboxGroup
-                                    label={`Select Tag`}
-                                    orientation="horizontal"
-                                    value={groupSelected}
-                                    onChange={handleCheckboxChange}
-                                    isRequired
+    if (dataTypes.length >= 1) {
+        return (
+            <>
+                <Modal
+                    backdrop='blur'
+                    // backdrop='transparent'
+                    className='max-w-[57vh] h-auto'
+                    isOpen={isOpen}
+                    hideCloseButton
+                >
+                    <ModalContent>
+                        {(onClose) => (
+                            <>
+                                <ModalHeader
+                                    className='bg-white pb-2'
+                                    style={{
+                                        backgroundImage: "none",
+                                        textAlign: "center",
+                                    }}
                                 >
-                                    <p className='text-red-800 text-[14px] w-full'>
-                                        {`${errorMessage}*`}
-                                    </p>
-                                    <ScrollShadow hideScrollBar offset={0}>
-                                        <div className='flex flex-wrap gap-[6px]'>
-                                            {dataTypes.map((item: any, i: number) => (
-                                                <CustomCheckbox
-                                                    key={i}
-                                                    value={item.type_id}
-                                                >
-                                                    {item.name}
-                                                </CustomCheckbox>
-                                            ))}
-                                        </div>
-                                    </ScrollShadow>
-                                </CheckboxGroup>
-
-                            </ModalBody>
-                            <ModalFooter className='flex items-center'>
-                                <div className='flex justify-items-end col-span-1'>
-                                    <Button
-                                        radius='full'
-                                        className='bg-violet-300 border-[1px] border-violet-500'
-                                        onClick={handleCheckClick}
+                                    <p className='w-full text-[20px]'>เลือกประเภทกิจกรรมที่คุณสนใจ</p>
+                                </ModalHeader>
+                                <ModalBody>
+                                    <CheckboxGroup
+                                        label={`Select Tag`}
+                                        orientation="horizontal"
+                                        value={groupSelected}
+                                        onChange={handleCheckboxChange}
+                                        isRequired
                                     >
-                                        Confirm
-                                    </Button>
-                                </div>
-                            </ModalFooter>
-                        </>
-                    )}
-                </ModalContent>
-            </Modal >
-        </>
-    )
+                                        <p className='text-red-800 text-[14px] w-full'>
+                                            {`${errorMessage}*`}
+                                        </p>
+                                        <ScrollShadow hideScrollBar offset={0}>
+                                            <div className='flex flex-wrap gap-[6px]'>
+                                                {dataTypes.map((item: any, i: number) => (
+                                                    <CustomCheckbox
+                                                        key={i}
+                                                        value={item.type_id}
+                                                    >
+                                                        {item.nametype}
+                                                    </CustomCheckbox>
+                                                ))}
+                                            </div>
+                                        </ScrollShadow>
+                                    </CheckboxGroup>
+
+                                </ModalBody>
+                                <ModalFooter className='flex items-center'>
+                                    <div className='flex justify-items-end col-span-1'>
+                                        <Button
+                                            radius='full'
+                                            className='bg-violet-300 border-[1px] border-violet-500'
+                                            onClick={handleCheckClick}
+                                        >
+                                            Confirm
+                                        </Button>
+                                    </div>
+                                </ModalFooter>
+                            </>
+                        )}
+                    </ModalContent>
+                </Modal >
+            </>
+        )
+    }
 }

@@ -105,7 +105,7 @@ function yedrootad() {
         >
           <CardHeader className="absolute z-10 top-1 flex-col !items-start text-center md:text-left">
             <p className="text-[34px] md:text-[34px] lg:text-[50px] text-white uppercase font-normal pt-4">
-              {item.name}
+              {item.nametype}
             </p>
             <p className="text-[18px] md:text-[24px] lg:text-[24px] text-white font-normal -mt-2 md:-mt-4">
               {item.detail}
