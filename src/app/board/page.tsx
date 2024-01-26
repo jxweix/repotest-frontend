@@ -13,7 +13,6 @@ function boardHome() {
   const [getUserid, setGetUserid] = useState<any>([]);
   const [dataCon, setDataCon] = useState<any>([]);
   const router = useRouter()
-  console.log("🚀 ~ boardHome ~ dataCon:", dataCon)
   // const [typeName, setTypeName] = useState<any>([]);
 
   useEffect(() => {
@@ -27,7 +26,6 @@ function boardHome() {
             .from('userConjoin_front')
             .select('conJoin')
             .eq('id', getUserid);
-          console.log("🚀 ~ fetchData ~ checkId:", checkId)
 
           if (checkId && checkId.length > 0) {
             const { data: activity } = await supabase
@@ -40,9 +38,6 @@ function boardHome() {
               .in('type_id', checkId[0].conJoin);
 
             if (nametype && activity) {
-              console.log("🚀 ~ fetchData ~ activity in if:", activity)
-
-              console.log("🚀 ~ fetchData ~ nametype:", nametype)
               // setTypeName(nametype)
               const joinData = activity?.map((item1: any) => {
                 const match = nametype?.find(
@@ -56,7 +51,6 @@ function boardHome() {
             }
           }
         }
-
 
       } catch (error: any) {
         console.error('Error fetching data:', error?.message);
@@ -79,7 +73,6 @@ function boardHome() {
 
   const refect = () => {
     router.push('/')
-    window.location.reload();
   }
 
   return (
