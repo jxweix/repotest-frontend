@@ -71,6 +71,7 @@ export default function showselect() {
         }
     }
     if (dataTypes.length >= 1) {
+        const newDataTypes = dataTypes.filter((item: any) => item.nametype.trim() !== 'No data');
         return (
             <>
                 <Modal
@@ -105,7 +106,7 @@ export default function showselect() {
                                         </p>
                                         <ScrollShadow hideScrollBar offset={0}>
                                             <div className='flex flex-wrap gap-[6px]'>
-                                                {dataTypes.map((item: any, i: number) => (
+                                                {newDataTypes.map((item: any, i: number) => (
                                                     <CustomCheckbox
                                                         key={i}
                                                         value={item.type_id}
