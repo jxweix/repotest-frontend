@@ -49,12 +49,12 @@
 
 .Item-hidden{
   background-color: transparent;
-  mix-blend-mode: screen;
-  filter: invert(100%);
+  color: white;
 }
 
 .chip {
+  display: grid;
   opacity: 1;
-  background-color: rgb(156, 161, 11);
+  background-color: rgb(61, 2, 170);
   color: white;
 }
