@@ -9,7 +9,6 @@ import { Database } from '@App/types/database.types';
 export default function showselect() {
     const [groupSelected, setGroupSelected] = useState<string[]>([]);
     const [dataTypes, setDataType] = useState<any>([]);
-    console.log("🚀 ~ showselect ~ dataTypes:", dataTypes)
     const { isOpen, onOpen } = useDisclosure();
     const path = usePathname();
     const supabase = createClientComponentClient<Database>();
