@@ -3,18 +3,18 @@
   display: block;
 }
 
-.figure {
+/* .figure {
   margin: 0;
   display: grid;
   grid-template-rows: 1fr auto;
   margin-bottom: 15px;
   break-inside: avoid;
-}
+} */
 
-.figure>.imgcard {
+/* .figure>.imgcard {
   grid-row: 1 / -1;
   grid-column: 1;
-}
+} */
 
 .figure a {
   text-decoration: none;
@@ -37,8 +37,8 @@
 }
 
 .Header {
-  filter: invert(.1);
-  opacity: 0;
+  /* filter: invert(.1); */
+  /* opacity: 0; */
   position: absolute;
   z-index: 10;
   display: flex;
@@ -57,4 +57,7 @@
   opacity: 1;
   background-color: rgb(61, 2, 170);
   color: white;
+}
+.img {
+  height: 500px;
 }

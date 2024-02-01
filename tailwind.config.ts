@@ -18,6 +18,9 @@ const config: Config = {
       },
       screens: {
         dark: { raw: '(prefers-color-scheme: dark)' },
+        'xl': '1920px',
+        'lg': '1024px',  // หน้าจอโน้ตบุ๊ค
+        'md': '340px',   // หน้าจอโทรศัพท์ขนาดปกติ
       },
       colors: {
         dark: {

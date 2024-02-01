@@ -18,3 +18,15 @@
     opacity: 1;
     background-color: rgba(236, 236, 236, 0.7);
 }
+
+.indicator {
+    outline: 4px solid #424242;
+    outline-offset: -2px;
+    width: rem(12px);
+    height: rem(4px);
+    transition: width 250ms ease;
+
+    &[data-active] {
+        width: rem(40px);
+    }
+}
