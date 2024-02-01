@@ -67,13 +67,14 @@ function boardHome() {
       }
     }; fetchData();
   }, []);
+console.log("ngo",dataCon);
 
   const comimage = dataCon?.map((img: any, i: number) => (
     <Card className='figure' key={i} isFooterBlurred>
       <CardHeader className="Header backdrop-blur">
         <div className='Item-hidden backdrop-contrast-50'>
 
-          <div className='grid grid-cols-3 grid-rows-2 w-[346px]'>
+          <div className='grid grid-cols-3 grid-rows-2 w-[370px]'>
             <div className='grid row-span-2 col-span-2 pl-[10px]'>
               <h4 className="mix-blend-screen font-medium text-[24px] grid items-end pb-1">{img.name}</h4>
               <Chip className='chip mix-blend-overlay'>{img.nametype}</Chip>
@@ -93,13 +94,13 @@ function boardHome() {
                     </Text>
                   }
                 />
-                <Text ta="center" className='uppercase'>score</Text>
+                <Text ta="center" className='uppercase'>Top Rate</Text>
               </span>
             </div>
           </div>
         </div>
       </CardHeader>
-      <Image className='imgcard' src={img.src} alt='photo' width={590} height={590} />
+      <Image className='imgcard' src={img.src} alt='photo' width={400} height={515} />
     </Card >
   ));
 
@@ -109,14 +110,25 @@ function boardHome() {
 
   return (
     <>
+    <div className="BG-page123 bg-violet-100 bg-none">
+      <div className="h-full pb-[3vh] overflow-x-hidden">
+        <div className="grid bg-transparent h-[20vh] mt-[10vh] items-center">
+          <p className="text-[60px] pl-[10vh] font-bold text-black">
+            นี่คือกิจกรรมที่เราแนะนำให้กับคุณ
+          </p>
+
+          <p className="text-[40px] pl-[10vh]  font-normal text-slate-600">
+            กิจกรรมต่างๆที่แนะนำ
+          </p>
+        </div>
+      </div>
+    </div>
       <div>
-        <ScrollShadow hideScrollBar>
-          <div className='wrapper'>
-            <div className='container'>
+      <div className='wrapper'>
+            <div className='grid grid-cols-3 gap-40'>
               {comimage}
             </div>
           </div>
-        </ScrollShadow>
       </div>
     </>
   );
