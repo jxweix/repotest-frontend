@@ -90,6 +90,7 @@ function boardHome() {
     };
     fetchData();
   }, []);
+  console.log("ngo", dataCon);
 
   const handPressable = (item: any) => {
     router.push(`board/${item.id}/detail`)
@@ -141,6 +142,19 @@ function boardHome() {
 
   return (
     <>
+      <div className="BG-page123 bg-violet-100 bg-none">
+        <div className="h-full pb-[3vh] overflow-x-hidden">
+          <div className="grid bg-transparent h-[20vh] mt-[10vh] items-center">
+            <p className="text-[60px] pl-[10vh] font-bold text-black">
+              นี่คือกิจกรรมที่เราแนะนำให้กับคุณ
+            </p>
+
+            <p className="text-[40px] pl-[10vh]  font-normal text-slate-600">
+              กิจกรรมต่างๆที่แนะนำ
+            </p>
+          </div>
+        </div>
+      </div>
       <div>
         <ScrollShadow hideScrollBar>
           <div className="wrapper">
