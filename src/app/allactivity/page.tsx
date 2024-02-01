@@ -135,7 +135,6 @@ function allactivity() {
           <p className="text-[60px] pl-[10vh] font-bold text-black">
             All Activity
           </p>
-
           <p className="text-[60px] pl-[10vh]  font-normal text-slate-600">
             all categories and activities
           </p>
