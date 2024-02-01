@@ -51,7 +51,7 @@ function allactivity() {
 
   useEffect(() => {
     const fetch = async () => {
-      const selecttype = [2, 6, 10, 14, 13]
+      const selecttype = [1, 2, 3, 4, 5]
       try {
         let { data: headitem } = await supabase
           .from('typetbl')
@@ -78,34 +78,36 @@ function allactivity() {
     const cardMapForType = filteredData.map((carditem: any, i: number) => (
       <Card
         key={i}
-        className="py-4 shadow-none min-w-[370px] w-[370px] max-h-[510px]"
+        className="py-4 shadow-none min-w-[370px] w-[370px] max-h-[450px]"
         style={{ backgroundColor: "rgba(255, 255, 255, 0.0)" }}
       // isPressable
       // onPress={() => handlderCard(item)}
       >
         <CardHeader className="absolute z-10 top-1 flex-col !items-start text-center md:text-left px-0">
-          <div className="bg-slate-500 w-full opacity-70 rounded-t-lg">
-            <p className="text-[34px] md:text-[34px] lg:text-[41px] opacity-100 font-normal text-white uppercase px-2 pt-4">
+          <div className=" bg-white w-30 opacity-100 mt-12 ml-12 hover:bg-black ">
+            <p className="text-[10px] md:text-[15px] lg:text-[15px] opacity-100 font-normal text-black uppercase px-2 hover:text-white">
               {carditem.name}
             </p>
           </div>
 
         </CardHeader>
-        <Image
-          alt="Card background"
-          className="z-0 w-full h-full object-cover object-center rounded-lg"
-          src={carditem.src}
-          width={370}
-          height={510}
-          draggable={false}
-        />
+        <div className="p-8">
+          <Image
+            alt="Card background"
+            className="activityhv z-0 w-full h-full object-cover object-center rounded-none"
+            src={carditem.src}
+            width={370}
+            height={510}
+            draggable={false}
+          />
+        </div>
       </Card >
     ));
 
     return (
       <>
         <div className="pl-[10vh] pt-[5vh]">
-          <p className="text-[55px] uppercase font-bold">
+          <p className="text-[40px] uppercase font-bold">
             {item.nametype}
           </p>
           <Divider className="my-4 bg-slate-800 h-[2px] w-[1690px]" />
@@ -113,8 +115,9 @@ function allactivity() {
         <div className="px-[10vh]">
           <div className="w-[1690px] h-full">
             <ScrollShadow
+              id="style-1"
               orientation="horizontal"
-              className="flex flex-initial flex-nowrap overflow-x-auto gap-5 scrollbar-hide"
+              className="flex flex-initial flex-nowrap overflow-x-auto gap-5 pb-8"
             >
               {cardMapForType}
             </ScrollShadow>
@@ -126,14 +129,18 @@ function allactivity() {
 
 
   return (
-    <div className="BG-page123 bg-white bg-none">
+    <div className="BG-page123 bg-violet-100 bg-none">
       <div className="h-full pb-[3vh] overflow-x-hidden">
-        <div className="grid bg-purple-200 h-[20vh] items-center">
-          <p className="text-[60px] pl-[10vh]">
-            Choose your favorite
+        <div className="grid bg-transparent h-[20vh] mt-[10vh] items-center">
+          <p className="text-[60px] pl-[10vh] font-bold text-black">
+            All Activity
+          </p>
+
+          <p className="text-[60px] pl-[10vh]  font-normal text-slate-600">
+            all categories and activities
           </p>
         </div>
-        {groupMap}
+        {groupMap} 
       </div>
     </div>
   );
