@@ -6,14 +6,11 @@ import { Card, CardHeader, ScrollShadow, Chip } from "@nextui-org/react";
 import { Database } from "@App/types/database.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { Center, Notification, RingProgress, Text } from "@mantine/core";
+import { RingProgress, Text } from "@mantine/core";
 
-// import getBoard from '@App/actions/getBoard';
 function boardHome() {
   const supabase = createClientComponentClient<Database>();
-  const [dataCon, setDataCon] = useState<any>([]);
   const [dataPython, setdataPython] = useState<any>([]);
-  const [dataUserall, setDataUserall] = useState<any>([]);
   const router = useRouter();
 
   //pthon
@@ -44,6 +41,7 @@ function boardHome() {
               alert(`404 kub pee \n >>>>>${codes.messegs}<<<<<`);
             }
           }
+
           let { data: fetchSrc } = await supabase
             .from("activity_show")
             .select("*")
@@ -51,8 +49,6 @@ function boardHome() {
               "type_id",
               dataRes.map((item: any) => item.type_id)
             );
-
-
           let { data: nametype } = await supabase
             .from("typetbl")
             .select("*")
@@ -82,22 +78,23 @@ function boardHome() {
                 ...item,
                 score: (item.score / Userlength) * 100,
               }));
-              setdataPython(scoreItem);
+              setdataPython(scoreItem.sort((a, b) => b.score - a.score));
             }
           }
         }
-      } catch (error) { }
+      } catch (error) {
+        console.log('error: ', error);
+      }
     };
     fetchData();
   }, []);
-  console.log("ngo", dataCon);
 
   const handPressable = (item: any) => {
     router.push(`board/${item.id}/detail`)
   }
 
   const pythonCard = dataPython?.map((img: any, i: number) => (
-    <Card className="figure" key={i} isFooterBlurred isPressable onPress={() => handPressable(img)}>
+    <Card className="figure mb-2" key={i} isFooterBlurred isPressable onPress={() => handPressable(img)}>
       <CardHeader className="Header backdrop-blur">
         <div className="Item-hidden backdrop-contrast-50 w-full">
           <div className="grid grid-cols-3 grid-rows-2 w-full">
@@ -107,8 +104,6 @@ function boardHome() {
               </h4>
               <Chip className="chip mix-blend-overlay">{img.nametype}</Chip>
             </div>
-
-            {/* <Chip className='chip justify-self-end'>{img.nametype}</Chip> */}
             <div className="row-span-2 grid justify-items-end w-full">
               <span>
                 <RingProgress
@@ -144,7 +139,7 @@ function boardHome() {
     <>
       <div className="BG-page123 bg-violet-100 bg-none">
         <div className="h-full pb-[3vh] overflow-x-hidden">
-          <div className="grid bg-transparent h-[20vh] mt-[10vh] items-center">
+          <div className="grid bg-transparent h-[15vh] mt-[10vh] items-center">
             <p className="text-[60px] pl-[10vh] font-bold text-black">
               นี่คือกิจกรรมที่เราแนะนำให้กับคุณ
             </p>
@@ -156,15 +151,11 @@ function boardHome() {
         </div>
       </div>
       <div>
-        <ScrollShadow hideScrollBar>
-          <div className="wrapper">
-            <div className="container">
-              {/* {comimage} */}
-              {/* <h1 className="uppercase">มีแค่ที่แนะนำกับ user</h1> */}
-              {pythonCard}
-            </div>
+        <div className="wrapper">
+          <div className="container">
+            {pythonCard}
           </div>
-        </ScrollShadow>
+        </div>
       </div>
     </>
   );
