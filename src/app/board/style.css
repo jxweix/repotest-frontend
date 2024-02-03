@@ -1,5 +1,7 @@
 .imgcard {
-  max-width: 100%;
+  max-width: 650px;
+  max-height: 590px;
+  width: 450px;
   display: block;
 }
 
@@ -28,8 +30,13 @@
 }
 
 .container {
-  column-count: 4;
+  padding-top: 5vh;
+  column-count: 3;
   gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7vh;
 }
 
 .figure:hover .Header {
@@ -47,7 +54,7 @@
   mix-blend-mode: screen;
 }
 
-.Item-hidden{
+.Item-hidden {
   background-color: transparent;
   color: white;
 }
@@ -58,6 +65,7 @@
   background-color: rgb(61, 2, 170);
   color: white;
 }
+
 .img {
   height: 500px;
 }

@@ -79,7 +79,7 @@ export default function App() {
                 หน้าแรก
               </Link>
             </NavbarItem>
-            <NavbarItem>
+            {/* <NavbarItem>
               <Dropdown>
                 <DropdownTrigger>
                   <Button
@@ -108,7 +108,7 @@ export default function App() {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-            </NavbarItem>
+            </NavbarItem> */}
             <NavbarItem isActive={current == "/allactivity"}>
               <Link
                 color="foreground"
@@ -138,11 +138,11 @@ export default function App() {
           />
         </NavbarContent>
         <NavbarContent as="div" className="items-center" justify="end">
-          <Link href="/notificate">
+          {/* <Link href="/notificate">
             <Button variant="light" isIconOnly>
               <Image src={Iconnoti} width={28} alt="icon-noti" />
             </Button>
-          </Link>
+          </Link> */}
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar

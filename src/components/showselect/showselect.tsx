@@ -12,7 +12,7 @@ export default function showselect() {
     const { isOpen, onOpen } = useDisclosure();
     const path = usePathname();
     const supabase = createClientComponentClient<Database>();
-    const [errorMessage] = useState('สามารถเลือกได้แค่ 5 Tag')
+    const [errorMessage] = useState('เลือกอย่างน้อย 1 ประเภท')
     const [getUserid, setGetUserid] = useState<any>([]);
 
     const router = useRouter();
@@ -24,7 +24,6 @@ export default function showselect() {
                 if (id) {
                     setGetUserid(id.data.user?.id)
                 }
-
                 let { data: typetbl } = await supabase
                     .from('typetbl')
                     .select('*')
@@ -41,13 +40,13 @@ export default function showselect() {
     }, [path, onOpen, getUserid])
 
     const handleCheckboxChange = (value: any) => {
-        if (value.length <= 5) {
+        if (value.length >= 1) {
             setGroupSelected(value)
         }
     }
 
     const handleCheckClick = async () => {
-        if (groupSelected && groupSelected?.length == 5) {
+        if (groupSelected && groupSelected?.length >= 1) {
             try {
                 let { data: upsert, error } = await supabase
                     .from('userConjoin_front')
@@ -61,7 +60,7 @@ export default function showselect() {
                 }
                 else {
                     console.log("data succ this data: ", groupSelected);
-                    alert('บันทึกข้อมูลเรียบร้อยแล้ว')
+                    // alert('บันทึกข้อมูลเรียบร้อยแล้ว')
                     router.push('/board')
                 }
             } catch (error) {
@@ -103,18 +102,16 @@ export default function showselect() {
                                         <p className='text-red-800 text-[14px] w-full'>
                                             {`${errorMessage}*`}
                                         </p>
-                                        <ScrollShadow hideScrollBar offset={0}>
-                                            <div className='flex flex-wrap gap-[6px]'>
-                                                {newDataTypes.map((item: any, i: number) => (
-                                                    <CustomCheckbox
-                                                        key={i}
-                                                        value={item.type_id}
-                                                    >
-                                                        {item.nametype}
-                                                    </CustomCheckbox>
-                                                ))}
-                                            </div>
-                                        </ScrollShadow>
+                                        <div className='flex flex-wrap gap-[6px]'>
+                                            {newDataTypes.map((item: any, i: number) => (
+                                                <CustomCheckbox
+                                                    key={i}
+                                                    value={item.type_id}
+                                                >
+                                                    {item.nametype}
+                                                </CustomCheckbox>
+                                            ))}
+                                        </div>
                                     </CheckboxGroup>
 
                                 </ModalBody>

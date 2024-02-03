@@ -3,7 +3,6 @@ import { Carousel } from "@mantine/carousel";
 import {
   Button,
   Card,
-  CardBody,
   CardHeader,
   Chip,
   Image,
@@ -16,7 +15,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@App/types/database.types";
 import classes from '../style/style.module.css';
 import { RingProgress, Text } from "@mantine/core";
-
+import iconGather from '../../../../../public/icons/icon-gather.png'
 import iconBack from '../../../../../public/icons/angle-left.png'
 
 function shuffleArray(array: any[]) {
@@ -33,12 +32,25 @@ export default function detail() {
   const supabase = createClientComponentClient<Database>();
   const [dataBoard, setDataBoard] = useState<any>([]);
   const [dataAi, setDataAi] = useState<any>([]);
+  const [dataGather, setDataGather] = useState<any>([]);
   const router = useRouter();
+
+  const headleClickLink = () => {
+    const GatherSrc = dataGather.map((item: any) => item.link.gatherlink)
+    window.open(GatherSrc, '_blank')
+  }
 
   useEffect(() => {
     (async () => {
       const dataUser = await supabase.auth.getUser()
       const getUserId: any = dataUser.data.user?.id;
+      let { data: gettype } = await supabase
+        .from('activity_show')
+        .select(`id , type_id , name  , link:typetbl(gatherlink)`)
+        .eq('id', [path.id])
+      if (gettype) {
+        setDataGather(gettype)
+      }
       if (path && getUserId) {
         let { data: dataCon } = await supabase
           .from('userConjoin_front')
@@ -89,12 +101,16 @@ export default function detail() {
     })()
   }, []);
 
+  const handPressable = (item: any) => {
+    router.push(`/board/${item.id}/detail`)
+  }
+
   const pythonCard = dataAi?.map((img: any, i: number) => (
-    <Card className="relative max-h-[710px] rounded-[27px]" key={i} isFooterBlurred>
+    <Card className="relative max-h-[710px] rounded-[27px]" key={i} isFooterBlurred isPressable onPress={() => handPressable(img)}>
       <CardHeader className="absolute z-20 backdrop-blur-sm backdrop-contrast-50 w-full">
         <div className="grid grid-cols-3 grid-rows-2 w-full">
           <div className="grid row-span-2 col-span-2 pl-[10px]">
-            <h4 className="mix-blend-screen font-medium text-[24px] grid items-end text-[#fff] pb-1">{img.name}</h4>
+            <h4 className="mix-blend-screen font-medium text-[24px] grid items-end text-[#fff] text-left pb-1">{img.name}</h4>
             <Chip className="bg-[#3d02aaa1]/50 text-[#fff] mix-blend-overlay">{img.typetbl.nametype}</Chip>
           </div>
           <div className="row-span-2 grid justify-items-end w-full">
@@ -186,13 +202,19 @@ export default function detail() {
                     />
                   </div>
                   <div className="grid justify-items-end">
-                    <Button className="rounded-full w-[150px]">เข้าร่วม</Button>
+                    {/* <Button className="rounded-full w-[150px]">เข้าร่วม</Button> */}
                   </div>
                 </span>
               </div>
               <div className="grid py-[2vh]">
-                <Button className="bg-[#3A3DAB] text-[#fff]" endContent={
-                  <Images className="rounded-full" src={"https://i.pinimg.com/236x/93/6a/6a/936a6a82f4967f4b4513be8d3a40e218.jpg"} width={40} height={40} alt="img" />}>
+                <Button className="bg-[#3A3DAB] rounded-full h-[48px] items-center text-[#fff]"
+                  endContent={
+                    <Images className="rounded-full"
+                      src={iconGather}
+                      width={30} height={30} alt="icon-gather" />
+                  }
+                  onClick={(() => headleClickLink())}
+                >
                   Go to Gathaer.town
                 </Button>
               </div>
@@ -207,7 +229,7 @@ export default function detail() {
             </div>
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
