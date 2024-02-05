@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
 
   if (browser.name?.includes("Line")) {
     return NextResponse.redirect(
-      new URL("/", "https://repotest-dev.vercel.app")
+      new URL("/line-block", "https://repotest-dev.vercel.app")
     );
   }
 
@@ -19,7 +19,15 @@ export async function middleware(req: NextRequest) {
   return res;
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/"],
-};
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    '/((?!api|!line-block|_next/static|_next/image|favicon.ico).*)',
+  ],
+}
