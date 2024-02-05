@@ -148,7 +148,6 @@ export default function detail() {
       <Image
         className="rounded-[23px]"
         src={src}
-        placeholder="blur"
         loading="lazy"
         alt={`photo-${i}`}
       />
