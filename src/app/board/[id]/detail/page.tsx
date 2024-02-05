@@ -1,314 +1,234 @@
 "use client";
 import { Carousel } from "@mantine/carousel";
-import { AspectRatio, Progress } from "@mantine/core";
 import {
-  Accordion,
-  AccordionItem,
   Button,
   Card,
-  CardBody,
   CardHeader,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
+  Chip,
   Image,
-  Input,
-  Link,
   User,
 } from "@nextui-org/react";
 import Images from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import classes from "../style/style.module.css";
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@App/types/database.types";
+import classes from '../style/style.module.css';
+import { RingProgress, Text } from "@mantine/core";
+import iconGather from '../../../../../public/icons/icon-gather.png'
+import iconBack from '../../../../../public/icons/angle-left.png'
 
-import { EmblaCarouselType } from "embla-carousel-react";
-import Iconell from "../../../../../public/icons/Iconellipses.png";
-import Iconsend from "../../../../../public/icons/Iconsend.png";
-import Kj from "../../../../../public/images/bkPage-1.jpg";
-const allComments = [
-  {
-    user: "Jxweix",
-    link: "https://www.instagram.com/jxweix/",
-    link_name: "@jxweix",
-    pic: "https://avatars.githubusercontent.com/u/30373425?v=4",
-  },
-  {
-    user: "awaken",
-    link: "https://www.instagram.com/jxweix/",
-    link_name: "@awaken",
-    pic: "https://avatars.githubusercontent.com/u/30373425?v=4",
-  },
-  {
-    user: "coluxz",
-    link: "https://www.instagram.com/jxweix/",
-    link_name: "@coluxz",
-    pic: "https://avatars.githubusercontent.com/u/30373425?v=4",
-  },
-];
-
-const allCard = [
-  {
-    boardName: "name_1",
-    mapName: "name_map_1",
-    src: "https://i.pinimg.com/564x/5d/7f/13/5d7f134a0f55ef5319e3c23dac63ee14.jpg",
-    width: 570,
-  },
-  {
-    boardName: "name_1",
-    mapName: "name_map_1",
-    src: "https://i.pinimg.com/564x/e1/ec/92/e1ec9214f81b3133621c5c43a3fb9757.jpg",
-    width: 570,
-  },
-  {
-    boardName: "name_1",
-    mapName: "name_map_1",
-    src: "https://i.pinimg.com/564x/fa/22/4c/fa224ca4f8f8eefce166c3068bcd15ef.jpg",
-    width: 570,
-  },
-];
-
-const MapCard = allCard.map((card) => (
-  <Card className="py-4 mx-[3vh] w-auto">
-    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-      <h4 className="font-bold text-large">{card.boardName}</h4>
-      <p className="text-tiny uppercase font-bold">{card.mapName}</p>
-      <small className="text-default-500">tag</small>
-    </CardHeader>
-    <CardBody className="overflow-visible py-2">
-      <Image
-        alt={card.boardName}
-        className="object-cover rounded-xl"
-        src={card.src}
-        width={card.width}
-        height={450}
-      />
-    </CardBody>
-  </Card>
-));
+function shuffleArray(array: any[]) {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+}
 
 export default function detail() {
-  const [selectedKeys, setSelectedKeys] = useState<any>(new Set(["1"]));
-  const [comment, setComment] = useState(allComments);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [embla, setEmbla] = useState<EmblaCarouselType | null>(null);
+  const path = useParams()
+  const supabase = createClientComponentClient<Database>();
+  const [dataBoard, setDataBoard] = useState<any>([]);
+  const [dataAi, setDataAi] = useState<any>([]);
+  const [dataGather, setDataGather] = useState<any>([]);
+  const router = useRouter();
 
-  const size = [
-    {
-      src: Kj,
-      height: "446px",
-    },
-    {
-      src: Kj,
-      height: "446px",
-    },
-    {
-      src: Kj,
-      height: "446px",
-    },
-  ];
-
-  const handleScroll = useCallback(() => {
-    if (!embla) return;
-    const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
-    setScrollProgress(progress * 100);
-  }, [embla, setScrollProgress]);
+  const headleClickLink = () => {
+    const GatherSrc = dataGather.map((item: any) => item.link.gatherlink)
+    window.open(GatherSrc, '_blank')
+  }
 
   useEffect(() => {
-    if (embla) {
-      embla.on("scroll", handleScroll);
-      handleScroll();
-    }
-  }, [embla]);
+    (async () => {
+      const dataUser = await supabase.auth.getUser()
+      const getUserId: any = dataUser.data.user?.id;
+      let { data: gettype } = await supabase
+        .from('activity_show')
+        .select(`id , type_id , name  , link:typetbl(gatherlink)`)
+        .eq('id', [path.id])
+      if (gettype) {
+        setDataGather(gettype)
+      }
+      if (path && getUserId) {
+        let { data: dataCon } = await supabase
+          .from('userConjoin_front')
+          .select(`*`)
+          .in('id', [getUserId])
+        let { data: datalegth } = await supabase
+          .from('userConjoin_front')
+          .select(`*`)
+        const Userlength: number | any = datalegth?.length;
 
-  const testmap = size.map((photo, i) => (
-    <Carousel.Slide>
-      <Images
-        className="rounded-[27px]"
-        src={photo.src}
-        placeholder="blur"
-        loading="lazy"
-        // sizes={750}
-        // width={photo.width}
-        // height={photo.height}
+        if (dataCon) {
+          const UserNo = dataCon[0]?.No
+          const datafetch = await fetch(`https://repotest-backend.onrender.com/user_id/${UserNo}`)
+          const dataAi = await datafetch.json()
+          const sortedDataAi = [...dataAi].sort((a, b) => b.score - a.score);
+          const topScores = sortedDataAi.slice(0, 3);
+          let { data: dataBoard } = await supabase
+            .from('activity_show')
+            .select(`* , typetbl(nametype)`)
+            .in('type_id', topScores.map((item: any) => (item.type_id)))
+          if (dataBoard) {
+            const joinData = dataBoard?.map((item1: any) => {
+              const match = topScores?.find(
+                (item2: any) => item2.type_id === item1.type_id
+              );
+              return { ...item1, ...match };
+            });
+            if (joinData) {
+              const scoreItem = joinData.map((item: any) => ({
+                ...item,
+                score: (item.score / Userlength) * 100,
+              }));
+              const randomData = shuffleArray(scoreItem);
+              const recoment = randomData.slice(0, 3).sort((a, b) => b.score - a.score);;
+              setDataAi(recoment)
+            }
+          }
+        }
+
+        let { data: datafetch } = await supabase
+          .from('activity_show')
+          .select(`*,userInfo:user_test(*)`)
+          .in('id', [path.id])
+        if (datafetch && datafetch.length > 0) {
+          setDataBoard(datafetch)
+        }
+      }
+    })()
+  }, []);
+
+  const handPressable = (item: any) => {
+    router.push(`/board/${item.id}/detail`)
+  }
+
+  const pythonCard = dataAi?.map((img: any, i: number) => (
+    <Card className="relative max-h-[710px] rounded-[27px]" key={i} isFooterBlurred isPressable onPress={() => handPressable(img)}>
+      <CardHeader className="absolute z-20 backdrop-blur-sm backdrop-contrast-50 w-full">
+        <div className="grid grid-cols-3 grid-rows-2 w-full">
+          <div className="grid row-span-2 col-span-2 pl-[10px]">
+            <h4 className="mix-blend-screen font-medium text-[24px] grid items-end text-[#fff] text-left pb-1">{img.name}</h4>
+            <Chip className="bg-[#3d02aaa1]/50 text-[#fff] mix-blend-overlay">{img.typetbl.nametype}</Chip>
+          </div>
+          <div className="row-span-2 grid justify-items-end w-full">
+            <span>
+              <RingProgress
+                size={90}
+                thickness={10}
+                roundCaps
+                sections={[{ value: img.score, color: "blue" }]}
+                label={
+                  <Text c="blue" fw={700} ta="center" size="xl">
+                    {parseInt(img.score) + "%"}
+                  </Text>
+                }
+              />
+              <Text ta="center" className="uppercase text-[#fff]">
+                Top Rate
+              </Text>
+            </span>
+          </div>
+        </div>
+      </CardHeader>
+      <Image
+        className="h-full min-h-[590px] bg-center"
+        src={img.src}
         alt="photo"
+        width={590}
+        height={590}
+      />
+    </Card>
+  ));
+
+  const groupPhoto = dataBoard[0]?.srcGroup?.map((src: string, i: number) => (
+    <Carousel.Slide key={i}>
+      <Image
+        className="rounded-[23px]"
+        src={src}
+        loading="lazy"
+        alt={`photo-${i}`}
       />
     </Carousel.Slide>
   ));
 
-  const handleDeleteComment = (i: number) => {
-    const updatedComments = [...comment];
-    updatedComments.splice(i, 1);
-    setComment(updatedComments);
-  };
-
-  const comments = useMemo(() => {
-    return comment.map((item, i) => {
-      const key = `comment-${i}`;
-      return (
-        <div className="grid grid-cols-2 grid-rows-1 " key={key}>
-          <div className="justify-start items-start">
-            <User
-              name={item.user}
-              description={
-                <Link
-                  className="text-[#d1d1d1]"
-                  href={item.link}
-                  size="sm"
-                  isExternal
-                >
-                  {item.link_name}
-                </Link>
-              }
-              avatarProps={{
-                src: item.pic,
-              }}
-            />
-          </div>
-          <div className="grid pr-[20px] justify-items-end items-center">
-            <Dropdown>
-              <DropdownTrigger>
-                <Images src={Iconell} width={20} height={5} alt="ell" />
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem
-                  key="delete"
-                  className="text-danger items-center"
-                  color="danger"
-                  onClick={() => handleDeleteComment(i)}
-                >
-                  delete
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        </div>
-      );
-    });
-  }, [comment]);
-
-  return (
-    <div>
-      <div className="BG-page123 h-auto pt-[10vh]">
-        <div className="grid mx-[10vh] rounded-[27px] justify-items-center grid-rows-2 grid-cols-2 bg-white">
-          <div className="grid rounded-[30px] justify-items-center w-full pt-10">
-            <div className="w-[750px]">
+  if (dataBoard && pythonCard && dataBoard.length !== 0 && pythonCard.length !== 0) {
+    return (
+      <div>
+        <div className="BG-page123 h-auto pt-[5vh]">
+          <div className="grid xl:mx-[10vh] lg:mx-[3vh] md:mx-0 rounded-[27px] justify-items-center xl:grid-cols-2 lg:grid-cols-2 bg-white">
+            <div className="grid w-full py-5">
               <Carousel
                 classNames={classes}
+                withIndicators
                 // dragFree
-                slideSize="95%"
-                slideGap="lg"
-                height={446}
-                getEmblaApi={setEmbla}
+                // slideSize="95%"
+                slideSize={"95%"}
+                slideGap="xl"
+                controlsOffset="xl"
+                controlSize={40}
+                height={"100%"}
               >
-                {testmap}
+                {groupPhoto}
               </Carousel>
-              <Progress value={scrollProgress} size="sm" mt="xl" mx="auto" />
             </div>
-          </div>
-          <div className="grid pl-[60px] grid-rows-5 w-full">
-            <div className="grid row-span-3 items-end justify-items-start">
-              <span>
-                <p className="text-[30px]">วาดรูปที่ถนนกันเถอะ </p>
-                <p>
-                  ไปวาดรูปรับลมที่ถนน ชมวิวรับควันรถบนถนน สร้างประสบการณ์ใหม่
-                </p>
-              </span>
-            </div>
-            <div className="grid pt-6 row-span-2 items-start justify-items-start">
-              <span className="flex">
-                <div className="flex-auto w-[37rem] justify-items-start">
-                  <User
-                    // key={key}
-                    name={"KJ-Jxweix"}
-                    description={<p>@KJ-jxweix</p>}
-                    avatarProps={{
-                      src: "https://i.pinimg.com/236x/93/6a/6a/936a6a82f4967f4b4513be8d3a40e218.jpg",
-                    }}
-                  />
-                </div>
-                <div className="flex-auto justify-items-end">
-                  <Button className="rounded-full w-[150px]">เข้าร่วม</Button>
-                </div>
-              </span>
-            </div>
-          </div>
-          <div className="rounded-lg grid justify-items-center pb-10 pt-0">
-            <p className="my-[20px]">เส้นทางเข้าผ่าน Google Map</p>
-            <div className="w-[750px] max-h-[446px]">
-              <AspectRatio ratio={16 / 9}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3025.3063874233135!2d-74.04668908358428!3d40.68924937933441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25090129c363d%3A0x40c6a5770d25022b!2sStatue%20of%20Liberty%20National%20Monument!5e0!3m2!1sen!2sru!4v1644262070010!5m2!1sen!2sru"
-                  title="Google map"
-                  style={{ border: 0, borderRadius: 27 }}
-                />
-              </AspectRatio>
-            </div>
-          </div>
-          <div className="rounded-lg p-[3vh]">
-            <Accordion
-              className="w-full min-w-[788px]"
-              selectedKeys={selectedKeys}
-              onSelectionChange={setSelectedKeys}
-            >
-              <AccordionItem
-                className="text-[24px]"
-                key="1"
-                title="ความคิดเห็น"
-              >
-                <div className="overflow-y-auto h-[300px]">{comments}</div>
-              </AccordionItem>
-            </Accordion>
-            <div className="grid grid-rows-1 grid-cols-10 items-center">
-              <div className="grid pr-1 justify-end items-center">
-                <User
-                  name=""
-                  description=""
-                  avatarProps={{
-                    src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                  }}
-                />
+            <div className="grid px-[5vh] grid-rows-5 w-full">
+              <div className="grid row-span-1 items-start justify-items-end pt-[2vh]">
+                <Button isIconOnly className="rounded-full right-[-3vh]" variant="light" onClick={() => router.push('/board')}>
+                  <Images className="pr-1" src={iconBack} alt="icon" width={25} height={25} />
+                </Button>
               </div>
-              <div className="grid col-span-8">
-                <Input
-                  type="text"
-                  placeholder="เพิ่มความคิดเห็น"
-                  radius="full"
-                  size="sm"
-                />
+              <div className="grid row-span-1 items-end justify-items-start">
+                <span className="py-[2vh]">
+                  <p className="text-[30px]">{dataBoard[0].name}</p>
+                  <p>
+                    {dataBoard[0].detail}
+                  </p>
+                </span>
               </div>
-              <div className="grid items-center">
-                <Button
-                  isIconOnly
-                  className="pt-1 ml-[15px]"
-                  radius="full"
-                  color="secondary"
-                  onClick={() => {
-                    setComment((prev) => [
-                      ...prev,
-                      {
-                        user: "123",
-                        link: "123",
-                        link_name: " dsad",
-                        pic: "https://avatars.githubusercontent.com/u/30373425?v=4",
-                      },
-                    ]);
-                  }}
+              <div className="grid pt-6 row-span-1 items-start justify-items-start">
+                <span className="grid grid-cols-2 grid-rows-1 w-full">
+                  <div className="grid justify-items-start">
+                    <User
+                      // key={key}
+                      name={dataBoard[0]?.userInfo?.user_name}
+                      description={<p>@{dataBoard[0]?.userInfo?.user_name}</p>}
+                      avatarProps={{
+                        src: "https://i.pinimg.com/236x/93/6a/6a/936a6a82f4967f4b4513be8d3a40e218.jpg",
+                      }}
+                    />
+                  </div>
+                  <div className="grid justify-items-end">
+                    {/* <Button className="rounded-full w-[150px]">เข้าร่วม</Button> */}
+                  </div>
+                </span>
+              </div>
+              <div className="grid py-[2vh]">
+                <Button className="bg-[#3A3DAB] rounded-full h-[48px] items-center text-[#fff]"
+                  endContent={
+                    <Images className="rounded-full"
+                      src={iconGather}
+                      width={30} height={30} alt="icon-gather" />
+                  }
+                  onClick={(() => headleClickLink())}
                 >
-                  <Images src={Iconsend} width={30} height={15} alt="send" />
+                  Go to Gathaer.town
                 </Button>
               </div>
             </div>
           </div>
-        </div>
-        <div className="h-auto py-[3vh]">
-          <div className="grid justify-items-center">
-            <p className="text-[30px] text-white"> บอร์ดอื่นๆ ที่แนะนำ</p>
-            <div className="grid grid-rows-1 grid-cols-3 mx-[10vh] mt-[30px] gap-7">
-              {MapCard}
+          <div className="h-auto py-[3vh]">
+            <div className="grid justify-items-center ">
+              <p className="text-[30px] text-white"> บอร์ดอื่นๆ ที่แนะนำ</p>
+              <div className="grid md:grid-rows-3 md:grid-cols-1 lg:grid-rows-1 lg:grid-cols-3  xl:mx-[9vh] lg:mx-0 md:mx-[2vh] mt-[30px] gap-7">
+                {pythonCard}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
+      </div >
+    );
+  }
 }

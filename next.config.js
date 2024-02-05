@@ -14,10 +14,6 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    serverActions: true,
-    serverComponents: true,
-  },
 }
 
 module.exports = withFonts(nextConfig);

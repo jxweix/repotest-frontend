@@ -15,7 +15,7 @@
 /* mantine */
 header {
   background-color: transparent;
-  background-image: url('/images/bkPage-1.jpg');
+  /* background-image: url('/images/bkPage-1.jpg'); */
 }
 
 /* NavBar */
@@ -151,7 +151,14 @@ body {
   cursor: pointer;
   outline: none;
   }
+
+.activityhv:hover{
+  transform: translateY(-10px);
+  box-shadow: 2px 2px 30px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition-duration: 700ms;
   
+}
 .cardnoti:hover {
 border: #006fff 0.2em solid;
 box-shadow: 0px 10px 20px rgba(46, 95, 229, 0.4);
@@ -166,4 +173,23 @@ transform: translateY(-5px);
 .createContainer{
   backdrop-filter: blur(15px);
   background: rgba(255, 255, 255, 0.2);
+}
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar
+{
+  height: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
 }
