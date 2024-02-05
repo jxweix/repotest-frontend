@@ -10,6 +10,10 @@ export async function middleware(req: NextRequest) {
   console.log("browser", browser);
   console.log("condition", browser.name?.includes("Line"));
 
+  if (browser.name?.includes("Line")) {
+    return NextResponse.redirect(new URL("/line-block", req.url));
+  }
+
   const supabase = createMiddlewareClient<Database>({ req, res });
   await supabase.auth.getSession();
   return res;
