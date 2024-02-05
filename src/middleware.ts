@@ -13,7 +13,6 @@ export async function middleware(req: NextRequest) {
       new URL("/line-block", "https://repotest-dev.vercel.app")
     );
   }
-  console.log("1231");
 
   const supabase = createMiddlewareClient<Database>({ req, res });
   await supabase.auth.getSession();
