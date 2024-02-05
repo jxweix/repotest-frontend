@@ -2,7 +2,7 @@
 import "./style.css";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Card, CardHeader, ScrollShadow, Chip } from "@nextui-org/react";
+import { Card, CardHeader, Chip, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
 import { Database } from "@App/types/database.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
@@ -12,6 +12,7 @@ function boardHome() {
   const supabase = createClientComponentClient<Database>();
   const [dataPython, setdataPython] = useState<any>([]);
   const router = useRouter();
+  const { isOpen, onOpen } = useDisclosure();
 
   //pthon
   useEffect(() => {
@@ -19,6 +20,7 @@ function boardHome() {
       try {
         let id = await supabase.auth.getUser();
         const getUser: any = id.data.user?.id;
+
         let { data: UserCon } = await supabase
           .from("userConjoin_front")
           .select("*");
@@ -34,6 +36,11 @@ function boardHome() {
           parseInt(mapus);
           const res = await fetch(`https://repotest-backend.onrender.com/user_id/${mapus}`);
           let dataRes: any = await res.json();
+          console.log("🚀 ~ fetchData ~ dataRes:", dataRes.detail)
+
+          if ('detail' in dataRes) {
+            onOpen()
+          }
 
           if (dataRes) {
             const codes = dataRes.find((item: any) => item.code === 404);
@@ -82,12 +89,18 @@ function boardHome() {
             }
           }
         }
+        else {
+          router.push('/');
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+        }
       } catch (error) {
         console.log('error: ', error);
       }
     };
     fetchData();
-  }, []);
+  }, [onOpen]);
 
   const handPressable = (item: any) => {
     router.push(`board/${item.id}/detail`)
@@ -135,22 +148,44 @@ function boardHome() {
     </Card>
   ));
 
+  const handleChageSe = () => {
+    router.push('/select')
+  }
+
   return (
     <>
-      <div className="BG-page123 bg-violet-100 bg-none">
-        <div className="h-full pb-[3vh] overflow-x-hidden">
-          <div className="grid bg-transparent h-[15vh] mt-[10vh] items-center">
-            <p className="text-[60px] pl-[10vh] font-bold text-black">
+      <Modal
+        isOpen={isOpen}
+        hideCloseButton
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>
+                <p>
+                  คุณยังไม่ได้เลือกความชอบ
+                </p>
+              </ModalHeader>
+              <ModalFooter>
+                <Button color="primary" onPress={handleChageSe}>
+                  ตงลง
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+      <div>
+        <div className="h-[20vh] xl:h-[25vh] overflow-hidden bg-purple-500">
+          <div className="row-span-1 grid h-full items-center">
+            <p className="xl:text-[40px] md:text-[24px] h-full grid items-end pl-[7vh] font-normal text-black">
               นี่คือกิจกรรมที่เราแนะนำให้กับคุณ
             </p>
-
-            <p className="text-[40px] pl-[10vh]  font-normal text-slate-600">
+            <p className="xl:text-[40px] md:text-[18px] h-full grid items-start pl-[7vh] font-normal text-slate-600">
               กิจกรรมต่างๆที่แนะนำ
             </p>
           </div>
         </div>
-      </div>
-      <div>
         <div className="wrapper">
           <div className="container">
             {pythonCard}
