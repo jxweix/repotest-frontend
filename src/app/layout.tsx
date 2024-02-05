@@ -6,10 +6,6 @@ import "@mantine/core/styles.css";
 import "./style/globals.css";
 
 export default function RootLayout({ children }: Readonly<IChildren>) {
-  const { userAgent } = navigator;
-
-  console.log(userAgent);
-
   return (
     <html lang="en">
       <head>
