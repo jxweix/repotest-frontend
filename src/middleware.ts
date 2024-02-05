@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
 
   if (browser.name?.includes("Line")) {
     return NextResponse.redirect(
-      new URL("/line-block", "https://repotest-dev.vercel.app")
+      new URL("/", "https://repotest-dev.vercel.app")
     );
   }
 
