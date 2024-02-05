@@ -16,6 +16,7 @@
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.39.3",
+    "embla-carousel-react": "^8.0.0-rc22",
     "filepond": "^4.30.4",
     "filepond-plugin-file-validate-size": "^2.2.8",
     "filepond-plugin-file-validate-type": "^1.2.8",
