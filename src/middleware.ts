@@ -13,6 +13,7 @@ export async function middleware(req: NextRequest) {
       new URL("/line-block", "https://repotest-dev.vercel.app")
     );
   }
+  console.log("1231");
 
   const supabase = createMiddlewareClient<Database>({ req, res });
   await supabase.auth.getSession();
@@ -28,6 +29,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|!line-block|_next/static|_next/image|favicon.ico).*)',
+    "/((?!api|line-block|_next/static|_next/image|favicon.ico).*)",
   ],
-}
+};
