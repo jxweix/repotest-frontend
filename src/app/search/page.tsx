@@ -3,11 +3,11 @@ import { Card, CardHeader, Chip, Image } from "@nextui-org/react";
 import React from "react";
 
 const initialFruits = [
-  "เข้าวัดหวังเอาบุญ เข้าหาคุณหวังเอาหี",
-  "อายุ 15 ตามหารักแท้",
-  "วันไนท์สแตนด์",
-  "นัดเย็ด",
-  "1,500พี่ว่าไง",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
 ];
 
 function search() {
