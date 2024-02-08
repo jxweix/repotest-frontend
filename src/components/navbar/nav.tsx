@@ -16,23 +16,24 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
   useDisclosure,
 } from "@nextui-org/react";
 import Image from "next/image.js";
-import { usePathname, useRouter } from "next/navigation.js";
+import { usePathname, useRouter } from "next/navigation";
 import { Database } from "@App/types/database.types";
 import {
   User,
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
-import Iconnoti from "../../../public/icons/Iconnoti.png";
 import Discord from '../../../public/icons/discord.png'
 import google from '../../../public/icons/google.png'
 import github from '../../../public/icons/github.png'
 import { AcmeLogo } from "./AcmeLogo";
 import { SearchIcon } from "./SearchIcon";
-import { IconCreate, IconEdit } from "./Icons";
 
 export default function App() {
   const current = usePathname();
@@ -40,16 +41,40 @@ export default function App() {
   const supabase = createClientComponentClient<Database>();
   const [user, setUser] = useState<User | null>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0";
-
+  const [inputSeag, setInputSeag] = useState<string>('');
+  const [dataItem, setDataItem] = useState<any>([]);
   useEffect(() => {
     (async () => {
       const { data } = await supabase.auth.getUser();
       setUser(data.user);
+      let { data: datafetch } = await supabase
+        .from('typetbl')
+        .select('type_id , nametype , detail , activity_show(id,name)')
+      if (datafetch) {
+        setDataItem(datafetch)
+      }
     })();
   }, []);
 
+  const LowCase: string = inputSeag ? inputSeag.toLowerCase() : '';
+  const matchSeach = dataItem.map((item: any) => ({
+    nametype: item.nametype.toLowerCase(),
+    nameBoard: item.activity_show.map((items: any) => ({
+      id: items.id,
+      name: items.name.toLowerCase()
+    }))
+  }));
+
+  const filterWord = matchSeach.filter((item: any) => {
+    // ใช้ some เพื่อตรวจสอบว่ามีชื่อใดชื่อหนึ่งใน nameBoard ที่มีค่าตรงกับ LowCase หรือไม่
+    return item.nametype.includes(LowCase) || item.nameBoard.some((board: any) => board.name.includes(LowCase));
+  }).map((item: any) => ({
+    nametype: item.nametype,
+    nameBoard: item.nameBoard.filter((board: any) => ({
+      id: board.id,
+      name: board.name.includes(LowCase)
+    }))
+  }));
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null)
@@ -60,16 +85,76 @@ export default function App() {
     }, 500)
   };
 
+  const handleClick = (e: any) => {
+    router.push(`/board/${e}/detail`)
+  }
+
   if (user !== null && user !== undefined) {
     // กรณีที่ user มีข้อมูล
     return (
       <Navbar maxWidth={"full"} className="Navbar" isBordered>
-        <NavbarContent justify="start">
-          <NavbarBrand className="mr-4">
+        <NavbarMenu className="text-center gap-[5vh] pt-[5vh]">
+          <NavbarItem isActive={current == "/board"}>
+            <Link
+              color="foreground"
+              href="/board"
+              style={{ color: current === "/board" ? "purple" : "" }}
+            >
+              หน้าแรก
+            </Link>
+          </NavbarItem>
+          <NavbarItem isActive={current == "/allactivity"}>
+            <Link
+              color="foreground"
+              href="/allactivity"
+              style={{ color: current === "/allactivity" ? "purple" : "" }}
+            >
+              ประเภทของกิจกรรม
+            </Link>
+          </NavbarItem>
+          <NavbarItem isActive={current == "/about"}>
+            <Link
+              color="foreground"
+              href="/about"
+              style={{ color: current === "/about" ? "purple" : "" }}
+            >
+              เกี่ยวกับเรา
+            </Link>
+          </NavbarItem>
+          <NavbarItem >
+            <Link
+              color="warning"
+              onClick={() => {
+                router.push('/select')
+              }}
+            >
+              Change Favorite
+            </Link>
+          </NavbarItem>
+          <NavbarItem >
+            <Link
+              color="danger"
+              onClick={() => {
+                handleSignOut();
+              }}
+            >
+              Log Out
+            </Link>
+          </NavbarItem>
+        </NavbarMenu>
+
+        <NavbarContent>
+          <NavbarMenuToggle
+            className="sm:hidden"
+          />
+          <NavbarBrand>
             <AcmeLogo />
-            <p className="hidden sm:block font-bold text-inherit">ACME</p>
+            <p className="font-bold text-inherit">ARS</p>
           </NavbarBrand>
-          <NavbarContent className="hidden sm:flex gap-3">
+        </NavbarContent>
+
+        <NavbarContent className="md:hidden lg:flex" justify="start">
+          <NavbarContent className="sm:flex gap-3">
             <NavbarItem isActive={current == "/board"}>
               <Link
                 color="foreground"
@@ -79,36 +164,6 @@ export default function App() {
                 หน้าแรก
               </Link>
             </NavbarItem>
-            {/* <NavbarItem>
-              <Dropdown>
-                <DropdownTrigger>
-                  <Button
-                    className="text-[16px] bg-transparent"
-                    disableRipple
-                  >
-                    จัดการบอร์ด
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu className="w-[300px] max-w-[350px]" variant="faded">
-                  <DropdownItem
-                    key="Create"
-                    href="/board/addboard"
-                    description="สร้างบอร์ด เพื่อสร้างกิจกรรมใหม่ๆ"
-                    startContent={<IconCreate className={iconClasses} />}
-                  >
-                    สร้างบอร์ด
-                  </DropdownItem>
-                  <DropdownItem
-                    key="Detail"
-                    href="/board/allboard"
-                    description="ดูบอร์ด และจัดการบอร์ดทั้งหมดของคุณ"
-                    startContent={<IconEdit className={iconClasses} />}
-                  >
-                    บอร์ดทั้งหมด
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </NavbarItem> */}
             <NavbarItem isActive={current == "/allactivity"}>
               <Link
                 color="foreground"
@@ -118,17 +173,27 @@ export default function App() {
                 ประเภทของกิจกรรม
               </Link>
             </NavbarItem>
+            <NavbarItem isActive={current == "/about"}>
+              <Link
+                color="foreground"
+                href="/about"
+                style={{ color: current === "/about" ? "purple" : "" }}
+              >
+                เกี่ยวกับเรา
+              </Link>
+            </NavbarItem>
           </NavbarContent>
         </NavbarContent>
         <NavbarContent className="w-full" justify="center">
           <Input
             classNames={{
-              base: "max-w-full h-10",
+              base: "max-w-full h-10 ",
               mainWrapper: "h-full",
-              input: ["text-small", "bg-transparent", "text-white"],
+              input: ["text-small", "bg-transparent", "text-drak"],
               inputWrapper:
                 "h-full font-normal text-default-500 bg-default-400/20 border-white dark:bg-transparent-500/20",
             }}
+            onClick={onOpen}
             placeholder="Type to search..."
             size="sm"
             radius="full"
@@ -136,6 +201,59 @@ export default function App() {
             startContent={<SearchIcon size={18} width={18} height={18} />}
             type="search"
           />
+          <Modal
+            classNames={{
+              base: "md:top-[7vh] lg:top-[1vh]"
+            }}
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            hideCloseButton
+            placement="top"
+          >
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader>
+                    <Input
+                      classNames={{
+                        base: "max-w-full h-10 ",
+                        mainWrapper: "h-full",
+                        input: ["text-small", "bg-transparent", "text-drak"],
+                        inputWrapper:
+                          "h-full font-normal text-default-500 bg-default-400/20 border-white dark:bg-transparent-500/20",
+                      }}
+                      onValueChange={setInputSeag}
+                      placeholder="Type to search..."
+                      size="sm"
+                      radius="full"
+                      variant="bordered"
+                      startContent={<SearchIcon size={18} width={18} height={18} />}
+                      type="search"
+                    />
+                  </ModalHeader>
+                  <ModalBody className="gap-1 flex w-auto">
+                    <p>ค้นหา</p>
+                    {filterWord.map((item: any, i: number) => (
+                      <div key={i} className="flex md:flex-wrap gap-1">
+                        {item.nameBoard.map((board: any, j: number) => (
+                          <Button
+                            key={j}
+                            className="w-full flex"
+                            variant='light'
+                            color="secondary"
+                            onClick={() => handleClick(board.id)}
+                          >
+                            <SearchIcon style={{ color: '#969696' }} className="min-w-[18px] px-[0.4px]" size={18} width={18} height={18} />
+                            <p className="flex w-full grow text-center ">{board.name}</p>
+                          </Button>
+                        ))}
+                      </div>
+                    ))}
+                  </ModalBody>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
         </NavbarContent>
         <NavbarContent as="div" className="items-center" justify="end">
           {/* <Link href="/notificate">
@@ -202,10 +320,10 @@ export default function App() {
             </DropdownMenu>
           </Dropdown>
         </NavbarContent>
-      </Navbar>
+      </Navbar >
     );
   } else {
-    // กรณีที่ user เป็น null หรือ undefined
+    // กรณีที่ user เป็นยังไม่ได้ทำการ login
     return (
       <Navbar maxWidth={"full"} className="Navbar" isBordered>
         <NavbarBrand>
