@@ -36,8 +36,6 @@ function boardHome() {
           parseInt(mapus);
           const res = await fetch(`https://repotest-backend.onrender.com/user_id/${mapus}`);
           let dataRes: any = await res.json();
-          console.log("🚀 ~ fetchData ~ dataRes:", dataRes.detail)
-
           if ('detail' in dataRes) {
             onOpen()
           }
@@ -182,7 +180,7 @@ function boardHome() {
               นี่คือกิจกรรมที่เราแนะนำให้กับคุณ
             </p>
             <p className="xl:text-[40px] md:text-[18px] h-full grid items-start pl-[7vh] font-normal text-slate-600">
-              กิจกรรมต่างๆที่แนะนำ
+              จากผู้ใช้ที่มีความสนใจคล้ายกัน
             </p>
           </div>
         </div>

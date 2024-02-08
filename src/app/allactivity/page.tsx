@@ -1,18 +1,10 @@
 "use client";
 import {
   Card,
-  CardBody,
-  CardFooter,
   CardHeader,
-  Chip,
   Divider,
   Image,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
   ScrollShadow,
-  useDisclosure,
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { Database } from "@App/types/database.types";
@@ -20,34 +12,13 @@ import {
   User,
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
 function allactivity() {
   const supabase = createClientComponentClient<Database>();
   const [dataitem, setDataitem] = useState<any>([]);
   const [tpyeitem, setTypeitem] = useState<any>([]);
-
-  // const handlderCard = async (item: any) => {
-  //   setKeyselect(item);
-  //   console.log("this selectL item:", item);
-
-  //   try {
-  //     if (item) {
-  //       const { data: activity, error } = await supabase
-  //         .from("activity_show")
-  //         .select("*")
-  //         .in("type_id", [item.type_id]);
-
-  //       if (activity) {
-  //         setDataboard(activity);
-  //         window.scrollTo({ top: 0, behavior: "smooth" });
-  //       } else {
-  //         console.log("ไม่เข้า if อีกแล้วไอแม่เย้ด");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
+  const router = useRouter();
 
   useEffect(() => {
     const fetch = async () => {
@@ -76,32 +47,32 @@ function allactivity() {
   const groupMap = tpyeitem.map((item: any) => {
     const filteredData = dataitem.filter((dataItem: any) => dataItem.type_id === item.type_id);
     const cardMapForType = filteredData.map((carditem: any, i: number) => (
-      <Card
-        key={i}
-        className="py-4 shadow-none min-w-[370px] w-[370px] max-h-[450px]"
-        style={{ backgroundColor: "rgba(255, 255, 255, 0.0)" }}
-      // isPressable
-      // onPress={() => handlderCard(item)}
-      >
-        <CardHeader className="absolute z-10 top-1 flex-col !items-start text-center md:text-left px-0">
-          <div className=" bg-white w-30 opacity-100 mt-12 ml-12 hover:bg-black ">
-            <p className="text-[10px] md:text-[15px] lg:text-[15px] opacity-100 font-normal text-black uppercase px-2 hover:text-white">
-              {carditem.name}
-            </p>
-          </div>
+      <div data-id={item.nametype.toLowerCase()}>
+        <Card
+          key={i}
+          className="py-4 shadow-none min-w-[370px] w-[370px] max-h-[450px]"
+          style={{ backgroundColor: "rgba(255, 255, 255, 0.0)" }}
+        >
+          <CardHeader className="absolute z-10 top-1 flex-col !items-start text-center md:text-left px-0">
+            <div className=" bg-white w-30 opacity-100 mt-12 ml-12 hover:bg-black ">
+              <p className="text-[10px] md:text-[15px] lg:text-[15px] opacity-100 font-normal text-black uppercase px-2 hover:text-white">
+                {carditem.name}
+              </p>
+            </div>
 
-        </CardHeader>
-        <div className="p-8">
-          <Image
-            alt="Card background"
-            className="activityhv z-0 w-full h-full object-cover object-center rounded-none"
-            src={carditem.src}
-            width={370}
-            height={510}
-            draggable={false}
-          />
-        </div>
-      </Card >
+          </CardHeader>
+          <div className="p-8">
+            <Image
+              alt="Card background"
+              className="activityhv z-0 w-full h-full object-cover object-center rounded-none"
+              src={carditem.src}
+              width={370}
+              height={510}
+              draggable={false}
+            />
+          </div>
+        </Card >
+      </div>
     ));
 
     return (
@@ -139,7 +110,7 @@ function allactivity() {
             all categories and activities
           </p>
         </div>
-        {groupMap} 
+        {groupMap}
       </div>
     </div>
   );
