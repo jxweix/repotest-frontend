@@ -1,6 +1,6 @@
 "use client"
-import { Card, CardHeader, CardBody, Image, CardFooter, Button } from "@nextui-org/react";
-import React, { useMemo, useState } from "react";
+import { Card, CardBody, Image, CardFooter, Button } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
 import Images from "next/image";
 import { Database } from "@App/types/database.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -10,8 +10,9 @@ import Igram from "../../../public/assets/svg/ig.svg"
 
 function about() {
     const supabase = createClientComponentClient<Database>();
-    const [aboutData, setAboutData] = useState<any>([])
-    useMemo(() => {
+    const [aboutData, setAboutData] = useState<any>([]);
+
+    useEffect(() => {
         const fetchData = async () => {
             let { data: aboutData } = await supabase
                 .from('aboutMe')
