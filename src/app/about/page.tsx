@@ -26,19 +26,23 @@ function page() {
                 if (error) {
                     throw new Error(error.message);
                 }
-                const names = aboutData.map(item => item.name);
-                const roles = aboutData.map(item => item.role);
-                const imageurl = aboutData.map(item => item.imageurl);
-                const fburl = aboutData.map(item => item.fburl);
-                const igurl = aboutData.map(item => item.igurl);
-                const ghurl = aboutData.map(item => item.ghurl);
+                
+                if (aboutData) {
+                    const names = aboutData.map(item => item.name);
+                    const roles = aboutData.map(item => item.role);
+                    const imageurl = aboutData.map(item => item.imageurl);
+                    const fburl = aboutData.map(item => item.fburl);
+                    const igurl = aboutData.map(item => item.igurl);
+                    const ghurl = aboutData.map(item => item.ghurl);
 
-                setNames(names);
-                setRoles(roles);
-                setimageurl(imageurl);
-                setFburl(fburl);
-                setIgurl(igurl);
-                setGhurl(ghurl);
+                    setNames(names);
+                    setRoles(roles);
+                    setimageurl(imageurl);
+                    setFburl(fburl);
+                    setIgurl(igurl);
+                    setGhurl(ghurl);
+                }
+
                 if (!aboutData) {
                     throw new Error('Data is empty');
                 }
@@ -53,9 +57,9 @@ function page() {
         <div className="container mx-auto px-4">
             <div>
                 <p className='text-[24px] md:text-[30px] lg:text-[40px] text-black font-semibold text-center p-8'> About Us</p>
-                <p className="text-[16px] md:text-[18px] lg:text-[20px] font-normal text-center"> เว็บไซต์นี้จัดทำขึ้นเพื่อศึกษาเรียนรู้เกี่ยวกับการใช้งานอัลกอริทึม AI และการเขียนเว็บไซต์ด้วยภาษา TypeScript 
-                 <br /> ในส่วนของตัว AI ศึกษาเกี่ยวกับอัลกอริทึมที่ชื่อว่า Collaborative Filtering , Cosine Similarity มาเพื่อแนะนำกิจกรรมบนเว็บไซต์  
-               </p>
+                <p className="text-[16px] md:text-[18px] lg:text-[20px] font-normal text-center"> เว็บไซต์นี้จัดทำขึ้นเพื่อศึกษาเรียนรู้เกี่ยวกับการใช้งานอัลกอริทึม AI และการเขียนเว็บไซต์ด้วยภาษา TypeScript
+                    <br /> ในส่วนของตัว AI ศึกษาเกี่ยวกับอัลกอริทึมที่ชื่อว่า Collaborative Filtering , Cosine Similarity มาเพื่อแนะนำกิจกรรมบนเว็บไซต์
+                </p>
             </div>
             <p className='text-[24px] md:text-[30px] lg:text-[40px] text-black font-semibold text-center p-8'> Team Member </p>
             <div className="relative overflow-hidden">
