@@ -8,46 +8,46 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 
 function page() {
-    const supabase = createClientComponentClient<Database>();
-    const [names, setNames] = useState<any>([]);
-    const [roles, setRoles] = useState<any>([]);
-    const [imageurl, setimageurl] = useState<any>([]);
-    const [fburl, setFburl] = useState<any>([]);
-    const [igurl, setIgurl] = useState<any>([]);
-    const [ghurl, setGhurl] = useState<any>([]);
+    // const supabase = createClientComponentClient<Database>();
+    // const [names, setNames] = useState<any>([]);
+    // const [roles, setRoles] = useState<any>([]);
+    // const [imageurl, setimageurl] = useState<any>([]);
+    // const [fburl, setFburl] = useState<any>([]);
+    // const [igurl, setIgurl] = useState<any>([]);
+    // const [ghurl, setGhurl] = useState<any>([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data: aboutData, error } = await supabase
-                    .from('aboutMe')
-                    .select('*');
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const { data: aboutData, error } = await supabase
+    //                 .from('aboutMe')
+    //                 .select('*');
 
-                if (error) {
-                    throw new Error(error.message);
-                }
-                const names = aboutData.map(item => item.name);
-                const roles = aboutData.map(item => item.role);
-                const imageurl = aboutData.map(item => item.imageurl);
-                const fburl = aboutData.map(item => item.fburl);
-                const igurl = aboutData.map(item => item.igurl);
-                const ghurl = aboutData.map(item => item.ghurl);
+    //             if (error) {
+    //                 throw new Error(error.message);
+    //             }
+    //             const names = aboutData.map(item => item.name);
+    //             const roles = aboutData.map(item => item.role);
+    //             const imageurl = aboutData.map(item => item.imageurl);
+    //             const fburl = aboutData.map(item => item.fburl);
+    //             const igurl = aboutData.map(item => item.igurl);
+    //             const ghurl = aboutData.map(item => item.ghurl);
 
-                setNames(names);
-                setRoles(roles);
-                setimageurl(imageurl);
-                setFburl(fburl);
-                setIgurl(igurl);
-                setGhurl(ghurl);
-                if (!aboutData) {
-                    throw new Error('Data is empty');
-                }
-            } catch (error) {
-                console.error('Error fetching data:',);
-            }
-        };
-        fetchData();
-    }, []);
+    //             setNames(names);
+    //             setRoles(roles);
+    //             setimageurl(imageurl);
+    //             setFburl(fburl);
+    //             setIgurl(igurl);
+    //             setGhurl(ghurl);
+    //             if (!aboutData) {
+    //                 throw new Error('Data is empty');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching data:',);
+    //         }
+    //     };
+    //     fetchData();
+    // }, []);
 
     return (
         <div className="container mx-auto px-4">
@@ -59,7 +59,7 @@ function page() {
             </div>
             <p className='text-[24px] md:text-[30px] lg:text-[40px] text-black font-semibold text-center p-8'> Team Member </p>
             <div className="relative overflow-hidden">
-                <Card className="py-4 flex flex-col-reverse lg:flex-row justify-center gap-40">
+                {/* <Card className="py-4 flex flex-col-reverse lg:flex-row justify-center gap-40">
                     {names.map((name: any, index: any) => (
                         <div key={index}>
                             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
@@ -99,7 +99,7 @@ function page() {
                             </div>
                         </div>
                     ))}
-                </Card>
+                </Card> */}
 
             </div>
         </div>
