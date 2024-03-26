@@ -3,7 +3,6 @@ import { Card, CardHeader, CardBody, Image, CardFooter, Button } from "@nextui-o
 import React, { useEffect, useState } from "react";
 import { Database } from "@App/types/database.types";
 import {
-    User,
     createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 
