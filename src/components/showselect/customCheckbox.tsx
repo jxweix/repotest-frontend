@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from 'react';
 import { useCheckbox, Chip, VisuallyHidden, tv } from "@nextui-org/react";
 import { CheckIcon } from './checkIcon'
 
@@ -22,7 +22,7 @@ const checkbox = tv({
     }
 })
 
-export const CustomCheckbox = (props:any) => {
+export const CustomCheckbox: React.FC<any> = (props: any) => {
     const {
         children,
         isSelected,
@@ -30,9 +30,7 @@ export const CustomCheckbox = (props:any) => {
         getBaseProps,
         getLabelProps,
         getInputProps,
-    } = useCheckbox({
-        ...props
-    })
+    } = useCheckbox({ ...props })
 
     const styles = checkbox({ isSelected, isFocusVisible })
 
@@ -43,13 +41,13 @@ export const CustomCheckbox = (props:any) => {
             </VisuallyHidden>
             <Chip
                 classNames={{
-                     base: styles.base(),
+                    base: styles.base(),
                     content: styles.content(),
                 }}
-                color="success"
+                color="primary"
                 startContent={isSelected ? <CheckIcon className="ml-1" /> : null}
                 variant="faded"
-                {...getLabelProps()}
+            // {...getLabelProps()}
             >
                 {children ? children : isSelected ? "Enabled" : "Disabled"}
             </Chip>
