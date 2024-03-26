@@ -15,7 +15,7 @@ function about() {
     useEffect(() => {
         const fetchData = async () => {
             let { data: aboutData } = await supabase
-                .from('todos')
+                .from('aboutMe')
                 .select('*')
 
             if (aboutData) {
