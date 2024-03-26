@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import {
   Card,
   CardHeader,
@@ -9,7 +9,6 @@ import {
 import React, { useEffect, useState } from "react";
 import { Database } from "@App/types/database.types";
 import {
-  User,
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
@@ -18,7 +17,6 @@ function allactivity() {
   const supabase = createClientComponentClient<Database>();
   const [dataitem, setDataitem] = useState<any>([]);
   const [tpyeitem, setTypeitem] = useState<any>([]);
-  const router = useRouter();
 
   useEffect(() => {
     const fetch = async () => {
@@ -98,21 +96,22 @@ function allactivity() {
     )
   })
 
-
   return (
-    <div className="BG-page123 bg-violet-100 bg-none">
-      <div className="h-full pb-[3vh] overflow-x-hidden">
-        <div className="grid bg-transparent h-[20vh] mt-[10vh] items-center">
-          <p className="text-[60px] pl-[10vh] font-bold text-black">
+    <>
+      <div className="h-[20vh] xl:h-[25vh] overflow-hidden bg-purple-500">
+        <div className="row-span-1 grid h-full items-center">
+          <p className="xl:text-[40px] md:text-[24px] h-full grid items-end pl-[7vh] font-normal text-black">
             All Activity
           </p>
-          <p className="text-[60px] pl-[10vh]  font-normal text-slate-600">
+          <p className="xl:text-[35px] md:text-[18px] h-full grid items-start pl-[7vh] font-normal text-white">
             all categories and activities
           </p>
         </div>
+      </div>
+      <div>
         {groupMap}
       </div>
-    </div>
+    </>
   );
 }
 
