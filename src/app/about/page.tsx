@@ -20,7 +20,7 @@ function page() {
         const fetchData = async () => {
             try {
                 const { data: aboutData, error } = await supabase
-                    .from('about')
+                    .from('aboutMe')
                     .select('*');
 
                 if (error) {

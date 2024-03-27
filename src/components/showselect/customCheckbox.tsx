@@ -49,7 +49,7 @@ export const CustomCheckbox = (props:any) => {
                 color="success"
                 startContent={isSelected ? <CheckIcon className="ml-1" /> : null}
                 variant="faded"
-                {...getLabelProps()}
+                // {...getLabelProps()}
             >
                 {children ? children : isSelected ? "Enabled" : "Disabled"}
             </Chip>
