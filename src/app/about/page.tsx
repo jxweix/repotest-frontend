@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import Images from "next/image";
 import { Database } from "@App/types/database.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Facebook from "../../../public/assets/svg/facebook.svg"
-import Github from "../../../public/assets/svg/github.svg"
-import Igram from "../../../public/assets/svg/ig.svg"
+// import Facebook from "../../../public/assets/svg/facebook.svg"
+// import Github from "../../../public/assets/svg/github.svg"
+// import Igram from "../../../public/assets/svg/ig.svg"
 
 function about() {
     const supabase = createClientComponentClient<Database>();
@@ -57,7 +57,8 @@ function about() {
                         disableRipple
                         onClick={() => handleClick(item, "ig")}
                     >
-                        <Images width={30} height={30} src={Igram} alt="Igram" />
+                        ig
+                        {/* <Images width={30} height={30} src={Igram} alt="Igram" /> */}
                     </Button>
                     <Button
                         isIconOnly
@@ -66,7 +67,8 @@ function about() {
                         disableRipple
                         onClick={() => handleClick(item, "fb")}
                     >
-                        <Images width={30} height={30} src={Facebook} alt="facebook" />
+                        fb
+                        {/* <Images width={30} height={30} src={Facebook} alt="facebook" /> */}
                     </Button>
                     <Button
                         isIconOnly
@@ -75,7 +77,8 @@ function about() {
                         disableRipple
                         onClick={() => handleClick(item, "git")}
                     >
-                        <Images width={25} height={25} src={Github} alt="Github" />
+                        git
+                        {/* <Images width={25} height={25} src={Github} alt="Github" /> */}
                     </Button>
                 </div>
             </CardFooter>
