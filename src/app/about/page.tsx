@@ -1,29 +1,13 @@
 "use client"
 import { Card, CardBody, Image, CardFooter, Button } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
 import Images from "next/image";
-import { Database } from "@App/types/database.types";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Facebook from "../../../public/assets/svg/facebook.svg"
 import Github from "../../../public/assets/svg/github.svg"
 import Igram from "../../../public/assets/svg/ig.svg"
+import { OneTableData, ConTableDataEq } from '@App/components/dataSupabase/DataFetch';
 
 function about() {
-    const supabase = createClientComponentClient<Database>();
-    const [aboutData, setAboutData] = useState<any>([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            let { data: aboutData } = await supabase
-                .from('aboutMe')
-                .select('*')
-
-            if (aboutData) {
-                setAboutData(aboutData)
-            }
-        };
-        fetchData();
-    }, []);
+    const aboutData = OneTableData('aboutMe');
 
     const handleClick = (item: any, name: string) => {
         if (name === 'ig') {
@@ -94,7 +78,7 @@ function about() {
                 <p className='grid text-[24px] md:text-[30px] lg:text-[40px] text-black font-semibold text-center p-8'>
                     Team Member
                 </p>
-                <div className="grid grid-cols-3 gap-x-8 w-[90vh]">
+                <div className="grid xl:grid-cols-3 xl:gap-x-8 md:grid-cols-1 md:gap-5">
                     {allAbout}
                 </div>
             </div>

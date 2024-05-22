@@ -75,14 +75,14 @@ function allactivity() {
 
     return (
       <>
-        <div className="pl-[10vh] pt-[5vh]">
+        <div className="xl:px-[10vh] pt-[5vh] md:px-4">
           <p className="text-[40px] uppercase font-bold">
             {item.nametype}
           </p>
-          <Divider className="my-4 bg-slate-800 h-[2px] w-[1690px]" />
+          <Divider className="my-4 bg-slate-800 h-[2px] xl:w-[1690px] md:w-[340px]" />
         </div>
-        <div className="px-[10vh]">
-          <div className="w-[1690px] h-full">
+        <div className="xl:px-[10vh] md:px-2">
+          <div className="xl:w-[1690px] h-full md:w-[340px]">
             <ScrollShadow
               id="style-1"
               orientation="horizontal"
@@ -114,10 +114,4 @@ function allactivity() {
     </>
   );
 }
-
-// export const getServerSideProps = async (context) => {
-//   const res = await fetch("http://localhost:3000/api/cardphoto");
-//   const cardphoto = await res.json();
-//   return { props: { cardphoto } };
-// };
 export default allactivity;

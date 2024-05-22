@@ -32,7 +32,6 @@
 .container {
   padding-top: 5vh;
   column-count: 3;
-  gap: 15px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

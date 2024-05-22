@@ -7,12 +7,14 @@ import { Database } from "@App/types/database.types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { RingProgress, Text } from "@mantine/core";
+import Skeleton from "@components/skeleton/skeleton"
 
 function boardHome() {
   const supabase = createClientComponentClient<Database>();
   const [dataPython, setdataPython] = useState<any>([]);
   const router = useRouter();
   const { isOpen, onOpen } = useDisclosure();
+  const skeletons = Array.from({ length: 6 }, (_, index) => index);
 
   //pthon
   useEffect(() => {
@@ -176,17 +178,27 @@ function boardHome() {
       <div>
         <div className="h-[20vh] xl:h-[25vh] overflow-hidden bg-purple-500">
           <div className="row-span-1 grid h-full items-center">
-            <p className="xl:text-[40px] md:text-[24px] h-full grid items-end pl-[7vh] font-normal text-black">
+            <p className="xl:text-[40px] md:text-[24px] h-full grid items-end xl:pl-[7vh] md:pl-[3vh] font-normal text-black ">
               นี่คือกิจกรรมที่เราแนะนำให้กับคุณ
             </p>
-            <p className="xl:text-[40px] md:text-[18px] h-full grid items-start pl-[7vh] font-normal text-slate-600">
+            <p className="xl:text-[40px] md:text-[18px] h-full grid items-start xl:pl-[7vh] md:pl-[3vh] font-normal text-slate-600 ">
               จากผู้ใช้ที่มีความสนใจคล้ายกัน
             </p>
           </div>
         </div>
         <div className="wrapper">
           <div className="container">
-            {pythonCard}
+            {dataPython.length > 0 ? (
+              <div className="container">
+                {pythonCard}
+              </div>
+            ) : <div className="container">
+              {skeletons.map((item) => (
+                <div key={item}>
+                  <Skeleton />
+                </div>
+              ))}
+            </div>}
           </div>
         </div>
       </div>
