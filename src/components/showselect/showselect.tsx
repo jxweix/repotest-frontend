@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Button, CheckboxGroup, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow, useDisclosure } from "@nextui-org/react";
-import { CustomCheckbox } from "./customCheckbox";
+import { Button, Checkbox, CheckboxGroup, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ScrollShadow, useDisclosure } from "@nextui-org/react";
 import { usePathname, useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '@App/types/database.types';
@@ -104,16 +103,15 @@ export default function showselect() {
                                         </p>
                                         <div className='flex flex-wrap gap-[6px]'>
                                             {newDataTypes.map((item: any, i: number) => (
-                                                <CustomCheckbox
+                                                <Checkbox
                                                     key={i}
                                                     value={item.type_id}
                                                 >
                                                     {item.nametype}
-                                                </CustomCheckbox>
+                                                </Checkbox>
                                             ))}
                                         </div>
                                     </CheckboxGroup>
-
                                 </ModalBody>
                                 <ModalFooter className='flex items-center'>
                                     <div className='flex justify-items-end col-span-1'>
