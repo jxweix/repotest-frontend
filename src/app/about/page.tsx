@@ -4,7 +4,7 @@ import Images from "next/image";
 import Facebook from "../../../public/assets/svg/facebook.svg"
 import Github from "../../../public/assets/svg/github.svg"
 import Igram from "../../../public/assets/svg/ig.svg"
-import { OneTableData, ConTableDataEq } from '@App/components/dataSupabase/DataFetch';
+import { OneTableData } from '@App/components/dataSupabase/DataFetch';
 
 function about() {
     const aboutData = OneTableData('aboutMe');
@@ -78,7 +78,7 @@ function about() {
                 <p className='grid text-[24px] md:text-[30px] lg:text-[40px] text-black font-semibold text-center p-8'>
                     Team Member
                 </p>
-                <div className="grid xl:grid-cols-3 xl:gap-x-8 md:grid-cols-1 md:gap-5">
+                <div className="grid xl:grid-cols-3 xl:gap-x-8 lg:grid-cols-3 md:grid-cols-1 md:gap-5">
                     {allAbout}
                 </div>
             </div>

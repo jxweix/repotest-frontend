@@ -4,7 +4,7 @@ import {Card, Skeleton} from "@nextui-org/react";
 
 export default function skeleton() {
   return (
-    <Card className="w-[450px] h-[590px] space-y-5 p-4" radius="lg">
+    <Card className="xl:w-[450px] h-[590px] md:w-[390px] space-y-5 p-4" radius="lg">
       <div className="flex flex-col py-[45px] gap-3 space-y-2 h-[140px]">
         <Skeleton className="w-3/5 rounded-lg ">
           <div className="h-[40px] w-3/5 rounded-lg bg-default-200"></div>

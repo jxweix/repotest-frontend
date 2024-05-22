@@ -75,14 +75,14 @@ function allactivity() {
 
     return (
       <>
-        <div className="xl:px-[10vh] pt-[5vh] md:px-4">
+        <div className="xl:px-[10vh] lg:px-[5vh] pt-[5vh] md:px-4">
           <p className="text-[40px] uppercase font-bold">
             {item.nametype}
           </p>
-          <Divider className="my-4 bg-slate-800 h-[2px] xl:w-[1690px] md:w-[340px]" />
+          <Divider className="my-4 bg-slate-800 h-[2px] xl:w-[1690px] lg:w-[960px] md:w-[340px]" />
         </div>
-        <div className="xl:px-[10vh] md:px-2">
-          <div className="xl:w-[1690px] h-full md:w-[340px]">
+        <div className="xl:px-[10vh] lg:px-[10px] md:px-2">
+          <div className="xl:w-[1690px] h-full lg:w-[1004px] md:w-[340px]">
             <ScrollShadow
               id="style-1"
               orientation="horizontal"
