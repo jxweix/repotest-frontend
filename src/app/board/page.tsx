@@ -8,6 +8,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { RingProgress, Text } from "@mantine/core";
 import Skeleton from "@components/skeleton/skeleton"
+import bkbanner from "../../../public/images/bkbanner.png"
 
 function boardHome() {
   const supabase = createClientComponentClient<Database>();
@@ -176,12 +177,12 @@ function boardHome() {
         </ModalContent>
       </Modal>
       <div>
-        <div className="h-[20vh] xl:h-[25vh] overflow-hidden bg-purple-500">
+        <div className="h-[20vh] mx-4 xl:h-[25vh] mt-4 overflow-hidden bg-banner bg-no-repeat bg-cover rounded-2xl">
           <div className="row-span-1 grid h-full items-center">
-            <p className="xl:text-[40px] md:text-[24px] h-full grid items-end xl:pl-[7vh] md:pl-[3vh] font-normal text-black ">
+            <p className="xl:text-[40px] md:text-[24px] h-full grid items-end xl:pl-[7vh] md:pl-[3vh] font-normal text-white ">
               นี่คือกิจกรรมที่เราแนะนำให้กับคุณ
             </p>
-            <p className="xl:text-[40px] md:text-[18px] h-full grid items-start xl:pl-[7vh] md:pl-[3vh] font-normal text-slate-600 ">
+            <p className="xl:text-[35px] md:text-[18px] h-full grid items-start xl:pl-[7vh] md:pl-[3vh] font-normal text-black ">
               จากผู้ใช้ที่มีความสนใจคล้ายกัน
             </p>
           </div>

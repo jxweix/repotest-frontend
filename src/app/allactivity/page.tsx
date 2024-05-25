@@ -16,7 +16,12 @@ import { useRouter } from "next/navigation";
 function allactivity() {
   const supabase = createClientComponentClient<Database>();
   const [dataitem, setDataitem] = useState<any>([]);
+  const router = useRouter();
   const [tpyeitem, setTypeitem] = useState<any>([]);
+
+  const handPressable = (id: any) => {
+    router.push(`board/${id}/detail`)
+  }
 
   useEffect(() => {
     const fetch = async () => {
@@ -50,6 +55,9 @@ function allactivity() {
           key={i}
           className="py-4 shadow-none min-w-[370px] w-[370px] max-h-[450px]"
           style={{ backgroundColor: "rgba(255, 255, 255, 0.0)" }}
+          isPressable
+          disableRipple
+          onPress={() => handPressable(carditem.id)}
         >
           <CardHeader className="absolute z-10 top-1 flex-col !items-start text-center md:text-left px-0">
             <div className=" bg-white w-30 opacity-100 mt-12 ml-12 hover:bg-black ">
@@ -75,18 +83,18 @@ function allactivity() {
 
     return (
       <>
-        <div className="xl:px-[10vh] lg:px-[5vh] pt-[5vh] md:px-4">
+        <div className="xl:px-[10vh] lg:px-[5vh] md:px-4 pt-[5vh] ">
           <p className="text-[40px] uppercase font-bold">
             {item.nametype}
           </p>
-          <Divider className="my-4 bg-slate-800 h-[2px] xl:w-[1690px] lg:w-[960px] md:w-[340px]" />
+          <Divider className="my-4 mt-4 bg-slate-800 h-[2px] xl:w-[1690px] lg:w-[960px] md:w-[340px]" />
         </div>
-        <div className="xl:px-[10vh] lg:px-[10px] md:px-2">
+        <div className="xl:px-[10vh] lg:px-[10px] md:px-2 w-full flex justify-center">
           <div className="xl:w-[1690px] h-full lg:w-[1004px] md:w-[340px]">
             <ScrollShadow
               id="style-1"
               orientation="horizontal"
-              className="flex flex-initial flex-nowrap overflow-x-auto gap-5 pb-8"
+              className="flex flex-initial flex-nowrap justify-center overflow-x-auto gap-5 pb-8"
             >
               {cardMapForType}
             </ScrollShadow>
@@ -98,13 +106,13 @@ function allactivity() {
 
   return (
     <>
-      <div className="h-[20vh] xl:h-[25vh] overflow-hidden bg-purple-500">
+      <div className="h-[20vh] xl:h-[25vh] mx-4 overflow-hidden bg-banner bg-no-repeat bg-cover rounded-2xl">
         <div className="row-span-1 grid h-full items-center">
-          <p className="xl:text-[40px] md:text-[24px] h-full grid items-end pl-[7vh] font-normal text-black">
+          <p className="xl:text-[40px] md:text-[24px] h-full grid items-end xl:pl-[7vh] md:pl-[3vh] font-normal text-white ">
             All Activity
           </p>
-          <p className="xl:text-[35px] md:text-[18px] h-full grid items-start pl-[7vh] font-normal text-white">
-            all categories and activities
+          <p className="xl:text-[35px] md:text-[18px] h-full grid items-start xl:pl-[7vh] md:pl-[3vh] font-normal text-black ">
+            All categories and activities
           </p>
         </div>
       </div>

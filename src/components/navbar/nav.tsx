@@ -17,7 +17,6 @@ import {
   NavbarContent,
   NavbarItem,
   NavbarMenu,
-  NavbarMenuItem,
   NavbarMenuToggle,
   useDisclosure,
 } from "@nextui-org/react";

@@ -42,7 +42,11 @@ export const OneTableDataEq = (tableName: keyof Database['public']['Tables'], ro
     return tableData;
 };
 
-export const OneTableDataArray = (tableName: keyof Database['public']['Tables'], row: any, param: any) => {
+export const OneTableDataArray = (
+    tableName: keyof Database['public']['Tables'],
+    row: any,
+    param: any
+) => {
     const [tableData, setTableData] = useState<any>([]);
 
     useEffect(() => {
@@ -50,7 +54,7 @@ export const OneTableDataArray = (tableName: keyof Database['public']['Tables'],
             let { data } = await supabase
                 .from(tableName)
                 .select('*')
-                .in(row, param)
+                .in(row as string, param)
 
             if (data) {
                 setTableData(data);
